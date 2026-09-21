@@ -16,6 +16,7 @@
 | **UT03** | **PERSISTENCIA DOCUMENTAL, CACHÉ Y PROCESAMIENTO ETL**                                                                      |                | `RA1` `RA3` |
 |          | [MongoDB]()                                                                                                         |                |  |
 |          | [Redis]()                                                                                                         |                |  |
+|          | [Lectura de datos con Pandas](./retos/reto1/)
 |          | [Saneamiento y optimización con Pandas]()                                                                                                         |                |  |
 |          | [Anonimización de datos]()                                                                                                         |                |  |
 |          | [Anonimización de datos]()                                                                                                         |                |  |
