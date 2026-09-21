@@ -1,6 +1,17 @@
-# Extracción de datos
+```
+------------- ESPECIALIZACIÓN EN INTELIGENCIA ARTIFICIAL Y BIG DATA -------------
+---------------------------------------------------------------------------------
 
-## 2.1.- Archivos delimitados (CSV/TSV)
+Módulo:                     SISTEMAS DE BIG DATA
+Profesor:                   Víctor J. González
+Unidad de Trabajo:          UT02. PERSISTENCIA DOCUMENTAL, CACHÉ Y PROCESAMIENTO ETL
+Apartado:                   1.- Carga de datos con Pandas
+Resultados de aprendizaje:  ?
+```
+
+# 1.- Carga de datos con Pandas
+
+## 1.1.- Archivos delimitados (CSV/TSV)
 
 Aunque comúnmente llamados CSV (_Comma Separated Values_), son archivos de texto delimitados. Poseen tres componentes:
 - **Delimitador:** coma (`,`), punto y coma (`;`, habitual en Europa donde la coma es separador decimal), tabulador (`\t`, seguro frente a colisiones), barra vertical (`|`), secuencias multicarácter (`::`, `~!~`), espacios variables (logs) o caracteres ASCII no imprimibles de control (`\x01` en Apache Hive).
@@ -53,7 +64,7 @@ print(df_csv.dtypes)
     Skipping line 7: Expected 5 fields in line 7, saw 6
 
 
-### 2.2 Hojas de Cálculo (Excel)
+### 1.2 Hojas de Cálculo (Excel)
 
 A diferencia del texto plano, un fichero `.xlsx` es un contenedor comprimido (ZIP) compuesto por archivos XML, estilos, metadatos y varias hojas, lo que demanda librerías auxiliares como `openpyxl` (para `.xlsx`) o `xlrd` (para formatos antiguos `.xls`).
 
@@ -92,7 +103,7 @@ print(df_excel)
     7     NaN            NaN          NaN       NaN                  NaN
 
 
-### 2.3 Formato JSON y JSON Lines
+### 1.3 Formato JSON y JSON Lines
 
 JSON es el estándar dominante en APIs web y bases de datos documentales. Su estructura jerárquica y anidada requiere técnicas de aplanado (_flattening_) para representarse de forma tabular.
 - `pd.json_normalize()`: Aplana diccionarios anidados utilizando notación de puntos para las columnas compuestas.
@@ -146,7 +157,7 @@ with open('datos.json', 'r', encoding='utf-8') as archivo:
     raw_json = json.load(archivo)
 ``` 
 
-### 2.4 Formato XML
+### 1.4 Formato XML
 
 Formato jerárquico basado en etiquetas que requiere de la librería `lxml` (que debemos instalar si no la tenemos instalada). Se procesa mediante `pd.read_xml()`, navegando la estructura con expresiones **XPath**:
 
@@ -201,7 +212,7 @@ print(df_xml)
     1  A002     Ratón    25.0
 
 
-### 2.5 Ingesta desde APIs REST
+### 1.5 Ingesta desde APIs REST
 
 Una API REST utiliza HTTP para interactuar con recursos identificados mediante URLs.
 - **Métodos principales:** `GET` (lectura), `POST` (creación), `PUT` (actualización), `DELETE` (eliminación).
@@ -339,7 +350,7 @@ except Exception as e:
     print(f"Error inesperado: {e}")
 ```
 
-### 2.6 Extracción Web (Web Scraping y `read_html`)
+### 1.6 Extracción Web (Web Scraping y `read_html`)
 
 - **Técnica:** Obtención programática de información contenida en sitios web.
 - **Retos habituales:** Carga de contenido dinámico mediante JavaScript, volatilidad del DOM, bloqueos de IP, resolución de CAPTCHAs y necesidad de respetar `robots.txt` y cabeceras `User-Agent`.

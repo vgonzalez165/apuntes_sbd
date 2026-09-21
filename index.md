@@ -15,7 +15,7 @@
 | **UT02** | **PERSISTENCIA DOCUMENTAL, CACHÉ Y PROCESAMIENTO ETL**                                                        |                | `RA1` `RA3` |
 |          | 2.1 [Carga de datos con Pandas](./apuntes/ut02/01_carga_de_datos/01_carga_datos.md)                            |                |  |
 |          | 2.2 [Limpieza de datos]()  | | |
-|          | 2.3 [Anonimización de datos]()                                                                                                         |                |  |
+|          | 2.3 [Anonimización de datos](./apuntes/ut02/03_anonimizacion/03_anonimizacion.md)                                                                                                         |                |  |
 |          | 2.4 [Bases de datos documentales (MongoDB)]()                                                                                                         |                |  |
 |          | 2.5 [Bases de datos clave-valor (Redis)]()                                                                                                         |                |  |
 |          |                                                                                                               |                |       |
