@@ -34,6 +34,8 @@ Veamos un ejemplo de cada uno de estos conceptos con los siguientes datos:
 | **Desidentificación** | *[eliminado]*      | *[eliminado]* | 43         | 24008        | Profesor informática | Arritmia cardíaca        |
 | **Seudonimización**   | `TKN-8492-AX`      | *[eliminado]* | 43         | 24008        | Profesor informática | Arritmia cardíaca        |
 | **Anonimización**     | *[eliminado]*      | *[eliminado]* | 40-49 años | León (24xxx) | Educación/Docencia   | Patología cardiovascular |
+
+
 **Desidentificación**: eliminaríamos los identificadores directos, pero mediante los cuasi-identificadores se podría reidentificar, por ejemplo, cruzando el censo con un directorio de institutos o una red social.
 **Seudonimización**: permite conservar los datos que identifican el registro (debería haber otra tabla que relacione los códigos asignados con los datos). Sigue siendo dato personal bajo RGDP.
 **Anonimización**: se eliminan los identificadores directos y, además, se aplican técnicas como generalización o supresión para que no sea posible reidentificar. Estos datos quedan fuera del ámbito de aplicación del RGPD.
