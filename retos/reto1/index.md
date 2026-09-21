@@ -28,4 +28,4 @@ Puedes acceder al enunciado del reto [aquí](./enunciado_alumno/index.md)
 | 2 | [Limpieza de datos con Pandas]()                                                      | |
 | 3 | [Anonimización de datos]()                                                            | |
 | 4 | [Bases de datos documentales (MongoDB)]()                                             | |
-| 5 | [Bases de datos en clave-valor (Redis)]()                                             | |
+| 5 | [Bases de datos clave-valor (Redis)]()                                                | |
