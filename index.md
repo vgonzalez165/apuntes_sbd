@@ -9,16 +9,15 @@
 |          | 1.2 [Conceptos de almacenamiento distribuido](./apuntes/ut01/02-conceptos-almacenamiento.md)                  |                |  |
 |          | 1.3 [Conceptos de procesamiento distribuido](./apuntes/ut01/03-conceptos-procesamiento.md)                    |                |  |
 |          | 1.4 [Ejemplos reales de uso del Big Data](./apuntes/ut01/04-ejemplos-reales-uso.md)                           |                |  |
-|          | 1.5 [Metodología SEMMA]()                           |                |  |
-|          | 1.6 [Metodología CRISP-DM]()                                    |    |  |
-|          | 1.7 [Trabajo en equipo con metodologías Ágiles]()               |    |  |
+|          | 1.5 [Metodologías de minería de datos: SEMMA y CRISP-DM](./apuntes/ut01/05-semma-crisp-dm.md)                 |                |  |
+|          | 1.6 [Trabajo en equipo con metodologías Ágiles]()               |    |  |
 |          |                                                                                                               |                |       |
 | **UT02** | **PERSISTENCIA DOCUMENTAL, CACHÉ Y PROCESAMIENTO ETL**                                                        |                | `RA1` `RA3` |
-|          | [1. Carga de datos con Pandas](./apuntes/ut02/01_carga_de_datos/01_carga_datos.md)                            |                |  |
-|          | [2. Limpieza de datos]()  | | |
-|          | [3. Anonimización de datos]()                                                                                                         |                |  |
-|          | [4. Bases de datos documentales (MongoDB)]()                                                                                                         |                |  |
-|          | [5. Bases de datos clave-valor (Redis)]()                                                                                                         |                |  |
+|          | 2.1 [Carga de datos con Pandas](./apuntes/ut02/01_carga_de_datos/01_carga_datos.md)                            |                |  |
+|          | 2.2 [Limpieza de datos]()  | | |
+|          | 2.3 [Anonimización de datos]()                                                                                                         |                |  |
+|          | 2.4 [Bases de datos documentales (MongoDB)]()                                                                                                         |                |  |
+|          | 2.5 [Bases de datos clave-valor (Redis)]()                                                                                                         |                |  |
 |          |                                                                                                               |                |       |
 |          |`RETO1` [Sistema de triaje y trazabilidad de urgencias hospitalarias](./retos/reto1/index.md)                  | **--/--/----** |       |
 |          |                                                                                                               |                |       |

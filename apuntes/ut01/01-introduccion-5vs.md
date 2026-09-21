@@ -4,18 +4,14 @@
 
 Módulo:                     SISTEMAS DE BIG DATA
 Profesor:                   Víctor J. González
-Unidad de Trabajo:          UT01. Introducción al Big Data
+Unidad de Trabajo:          UT01. INTRODUCCIÓN AL BIG DATA
 Apartado:                   1.- Introducción. Las 5 V's del Big Data
 Resultados de aprendizaje:  ?
 ```
 
+# 1. Introducción y las 5 V's del Big Data
 
-# UT01. INTRODUCCIÓN AL BIG DATA
-
-
-## 1. Introducción y las 5 V's del Big Data
-
-### 1.1. ¿Qué es Big Data?
+## 1.1. ¿Qué es Big Data?
 
 El término **Big Data** hace referencia a aquellos conjuntos de datos cuyo volumen, complejidad y velocidad de crecimiento hacen que las herramientas tradicionales de procesamiento de datos resulten insuficientes para capturarlos, almacenarlos, gestionarlos y analizarlos adecuadamente.
 
@@ -27,11 +23,11 @@ El ecosistema de Big Data procesa información proveniente de múltiples natural
 
 El propósito esencial de la disciplina reside en transformar estos grandes volúmenes de datos heterogéneos en información valiosa, permitiendo a las organizaciones mejorar la toma de decisiones, optimizar procesos operativos, diseñar nuevos productos o servicios y resolver problemas analíticos complejos.
 
-### 1.2. El origen del concepto y el paradigma de las 5 V's
+## 1.2. El origen del concepto y el paradigma de las 5 V's
 
 La caracterización del fenómeno Big Data mediante dimensiones que comienzan por la letra **V** se inició a principios de los años 2000, siendo el analista **Doug Laney** el primero en formalizar este enfoque. Inicialmente estructurado en torno a tres dimensiones fundamentales, el paradigma clásico se consolidó en las denominadas **5 V's**, que son volumen, velocidad, variedad, veracidad y valor.
 
-#### A. Volumen
+### A. Volumen
 
 Representa la inmensa cantidad de información generada y almacenada a escala global de manera continua. Este crecimiento exponencial viene impulsado por:
 
@@ -42,7 +38,7 @@ Representa la inmensa cantidad de información generada y almacenada a escala gl
 
 Este incremento ha desplazado las escalas habituales de medida hacia magnitudes como petabytes, exabytes y zettabytes. Según estudios del sector (como *Data Never Sleeps* de Domo y estimaciones de Statista), en 2022 el volumen global de datos generados y consumidos alcanzó los 97 zettabytes, proyectando alcanzar los 181 zettabytes en 2025 impulsado por una población conectada superior a los 5.000 millones de personas.
 
-#### B. Velocidad
+### B. Velocidad
 
 Describe la rapidez con la que los datos se generan, transmiten, procesan y analizan. En muchos escenarios críticos el valor del dato radica en la capacidad de respuesta inmediata:
 
@@ -53,7 +49,7 @@ Describe la rapidez con la que los datos se generan, transmiten, procesan y anal
 
 Para dar soporte a estas exigencias se emplean motores de flujo distribuido en tiempo real (*Apache Kafka*, *Apache Flink*, *Apache Storm*, *Spark Streaming*), bases de datos en memoria (*Redis*) y plataformas de análisis masivo altamente escalables (*Google BigQuery*, *Amazon Redshift*).
 
-#### C. Variedad
+### C. Variedad
 
 Alude a la coexistencia y convivencia de múltiples formatos y modelos de datos:
 
@@ -63,7 +59,7 @@ Alude a la coexistencia y convivencia de múltiples formatos y modelos de datos:
 
 La gestión de esta variedad impone desafíos específicos, como la necesidad de arquitecturas de almacenamiento híbridas y flexibles (HDFS, repositorios NoSQL), canalizaciones avanzadas de extracción, transformación y carga (ETL), mecanismos de control de calidad sin esquemas rígidos y la formación de perfiles técnicos multidisciplinares.
 
-#### D. Veracidad
+### D. Veracidad
 
 Define el nivel de fiabilidad, precisión, calidad y autenticidad que poseen los datos. Trabajar con datos de baja veracidad genera decisiones erróneas a nivel directivo y sesga los modelos de Inteligencia Artificial y Machine Learning.
 
@@ -76,7 +72,7 @@ Entre las causas más frecuentes de pérdida de veracidad destacan:
 
 Para mitigar estos problemas se aplican estrategias de depuración e imputación de valores faltantes, validación cruzada entre fuentes fiables, monitorización continua de métricas de calidad y tecnologías avanzadas de trazabilidad como *blockchain* o algoritmos de detección de anomalías mediante IA.
 
-#### E. Valor
+### E. Valor
 
 Es considerada la dimensión más crítica. Consiste en la capacidad de transformar los datos brutos en conocimiento accionable y útil para la organización. Almacenar datos sin un propósito analítico claro genera un coste en infraestructura sin retorno de inversión.
 
@@ -91,7 +87,7 @@ El valor se materializa cuando las organizaciones utilizan este conocimiento par
 
 
 
-### 1.3. Otras V's del Big Data
+## 1.3. Otras V's del Big Data
 
 Con la evolución de la tecnología se han incorporado dimensiones complementarias al modelo clásico:
 

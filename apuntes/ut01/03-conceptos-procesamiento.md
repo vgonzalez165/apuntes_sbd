@@ -4,19 +4,14 @@
 
 Módulo:                     SISTEMAS DE BIG DATA
 Profesor:                   Víctor J. González
-Unidad de Trabajo:          UT01. Introducción al Big Data
+Unidad de Trabajo:          UT01. INTRODUCCIÓN AL BIG DATA
 Apartado:                   3.- Conceptos de procesamiento
 Resultados de aprendizaje:  ?
 ```
 
+# 3. Conceptos de procesamiento
 
-# UT01. INTRODUCCIÓN AL BIG DATA
-
-
-
-## 3. Conceptos de procesamiento
-
-### 3.1. ¿Qué es el procesamiento en Big Data?
+## 3.1. ¿Qué es el procesamiento en Big Data?
 
 Se define como el conjunto de técnicas, modelos, algoritmos y herramientas tecnológicas dirigidas a transformar grandes volúmenes de datos brutos en información estructurada, útil, interpretable y directamente aplicable al negocio. Dado el tamaño masivo de los datos, el procesamiento se ejecuta obligatoriamente de forma **distribuida**, repartiendo las tareas de cómputo en paralelo entre múltiples nodos del clúster.
 
@@ -27,7 +22,7 @@ El ciclo de procesamiento persigue un doble propósito estructurado en dos grand
 
 
 
-### 3.2. Tipos de procesamiento: Batch vs. Stream Processing
+## 3.2. Tipos de procesamiento: Batch vs. Stream Processing
 
 Ambas modalidades pueden coexistir dentro de una misma arquitectura para atender necesidades analíticas complementarias:
 
@@ -39,7 +34,7 @@ Ambas modalidades pueden coexistir dentro de una misma arquitectura para atender
 | **Casos de uso**     | Cierre de facturación, consolidación contable, BI histórico, informes periódicos. | Detección de fraude, ajuste dinámico de precios, monitorización IoT, alertas de tráfico. |
 
 
-### 3.3. Fases del procesamiento en Big Data
+## 3.3. Fases del procesamiento en Big Data
 
 El flujo de procesamiento no se ejecuta en un único paso, sino mediante una secuencia estructurada de etapas independientes:
 

@@ -4,18 +4,14 @@
 
 Módulo:                     SISTEMAS DE BIG DATA
 Profesor:                   Víctor J. González
-Unidad de Trabajo:          UT01. Introducción al Big Data
+Unidad de Trabajo:          UT01. INTRODUCCIÓN AL BIG DATA
 Apartado:                   2.- Conceptos de almacenamiento
 Resultados de aprendizaje:  ?
 ```
 
+# 2. Conceptos de almacenamiento
 
-# UT01. INTRODUCCIÓN AL BIG DATA
-
-
-## 2. Conceptos de almacenamiento
-
-### 2.1. Sistemas de archivos distribuidos
+## 2.1. Sistemas de archivos distribuidos
 
 Durante décadas la persistencia empresarial descansó exclusivamente en los Sistemas de Gestión de Bases de Datos Relacionales (RDBMS), los cuales garantizan transacciones seguras bajo esquemas tabulares rígidos. No obstante, ante el volumen masivo y la heterogeneidad del Big Data, los esquemas relacionales tradicionales presentan dos limitaciones críticas:
 
@@ -25,13 +21,13 @@ Durante décadas la persistencia empresarial descansó exclusivamente en los Sis
 La respuesta técnica a estas restricciones es el **almacenamiento distribuido**, donde los archivos se dividen en bloques homogéneos y se reparten entre múltiples servidores estándar (*nodos*) agrupados en un *clúster*.
 
 
-#### Ventajas y desafíos del almacenamiento distribuido
+### Ventajas y desafíos del almacenamiento distribuido
 
 - **Ventajas:** Permite escalabilidad horizontal casi ilimitada (añadiendo más nodos al sistema), alta disponibilidad ante la caída de servidores y mejora del rendimiento global mediante lecturas y escrituras paralelas.
 - **Desafíos:** Complejidad en la gestión de la consistencia entre réplicas distribuidas y necesidad de minimizar la latencia de comunicación a través de la red interna.
 
 
-#### Mecanismos de replicación
+### Mecanismos de replicación
 
 Para garantizar tolerancia a fallos, sistemas como HDFS o Cassandra replican automáticamente cada bloque en varios nodos y racks:
 
@@ -39,13 +35,13 @@ Para garantizar tolerancia a fallos, sistemas como HDFS o Cassandra replican aut
 - **Replicación asíncrona:** Confirma la operación de inmediato en el nodo primario y propaga la copia al resto de forma diferida. Ofrece mayor rendimiento a costa de tolerar una posible inconsistencia temporal.
 
 
-#### Modelos de consistencia: ACID vs. BASE
+### Modelos de consistencia: ACID vs. BASE
 
 - **Consistencia Fuerte (Modelo ACID):** Propio de los sistemas relacionales tradicionales. Asegura Atomicidad (las transacciones son todo o nada), Consistencia (se preserva la integridad de los datos), Aislamiento (las operaciones concurrentes no interfieren entre sí) y Durabilidad (los cambios persisten tras caídas). En entornos distribuidos masivos, sincronizar todos los nodos penaliza gravemente la latencia y la disponibilidad.
 - **Consistencia Eventual (Modelo BASE):** Diseñado para sistemas NoSQL y distribuidos. Se define por *Basically Available* (el clúster siempre ofrece respuesta aunque sea degradada), *Soft state* (el estado del sistema puede fluctuar con el tiempo) y *Eventually Consistent* (con el tiempo suficiente sin nuevas escrituras, todos los nodos convergen al mismo estado). Sacrifica la consistencia inmediata a cambio de máxima disponibilidad y escalabilidad horizontal.
 
 
-#### El Teorema CAP
+### El Teorema CAP
 
 Formulado por **Eric A. Brewer**, demuestra que un sistema distribuido que comparte datos solo puede garantizar de manera simultánea dos de las siguientes tres propiedades:
 
@@ -62,11 +58,11 @@ En función del compromiso de diseño adoptado, los sistemas se clasifican en:
 
 
 
-### 2.2. Datasets
+## 2.2. Datasets
 
 Un **dataset** es una colección de datos recopilados, organizados y estructurados (o no estructurados) que se utiliza como insumo para tareas de análisis, modelado algorítmico, exploración científica o toma de decisiones.
 
-#### Características esenciales de los datasets en Big Data
+### Características esenciales de los datasets en Big Data
 
 - **Tamaño masivo:** Abarcan escalas que van desde gigabytes hasta petabytes o zettabytes.
 - **Variedad de tipologías:** Integran datos tabulares, semiestructurados (JSON, XML) y contenidos no estructurados (imágenes, textos, audios).
@@ -74,14 +70,14 @@ Un **dataset** es una colección de datos recopilados, organizados y estructurad
 - **Almacenamiento distribuido:** Persisten habitualmente sobre infraestructuras escalables como *Hadoop HDFS*, *Amazon S3* o *Google Cloud Storage*.
 
 
-#### Clasificación según el uso
+### Clasificación según el uso
 
 - **Operacionales:** Generados directamente por aplicaciones en producción y transacciones diarias (logs de sistemas, carritos de compra, mediciones de sensores).
 - **Analíticos:** Datos que han sido extraídos, consolidados, limpiados y transformados para alimentar herramientas de Business Intelligence (BI), paneles de mando y modelos de pronóstico.
 - **De entrenamiento:** Colecciones de datos preparadas específicamente para entrenar modelos de Inteligencia Artificial y Machine Learning, compuestas por vectores de características (*features*) y, en aprendizaje supervisado, sus etiquetas objetivo (*labels*).
 
 
-#### Ejemplos de datasets abiertos de referencia
+### Ejemplos de datasets abiertos de referencia
 
 - **Twitter Stream API:** Flujo en tiempo real de publicaciones, menciones e interacciones públicas.
 - **OpenStreetMap:** Base de datos geográfica y cartográfica colaborativa a escala global.
@@ -93,21 +89,21 @@ Un **dataset** es una colección de datos recopilados, organizados y estructurad
 - **Human Connectome Project (HCP):** Imágenes cerebrales de alta resolución (resonancias magnéticas) y datos genéticos.
 
 
-### 2.3. Data Warehouses, Data Lakes y Data Lakehouses
+## 2.3. Data Warehouses, Data Lakes y Data Lakehouses
 
-#### A. Data Warehouse
+### A. Data Warehouse
 
 Es un repositorio de almacenamiento estructurado centralizado concebido para integrar y depurar información procedente de múltiples fuentes operacionales. Los datos se modelan y transforman **antes** de ser insertados (*Schema-on-write*), organizándose con frecuencia en áreas temáticas departamentales denominadas *Data Marts*. Resultan óptimos para consultas SQL analíticas, informes históricos y cuadros de mando corporativos (ejemplos: *Google BigQuery*, *Amazon Redshift*, *Microsoft SQL Server Analysis Services*).
 
 Su arquitectura clásica comprende: Fuentes operacionales (ERP, CRM, ficheros) $\rightarrow$ Área de preparación o *Staging* (proceso ETL) $\rightarrow$ Almacén central (con metadatos y datos agregados) $\rightarrow$ *Data Marts* (ventas, finanzas, compras) $\rightarrow$ Consumo final por analistas.
 
-#### B. Data Lake
+### B. Data Lake
 
 Es un repositorio centralizado de alta capacidad que permite almacenar grandes volúmenes de datos en su formato nativo o en bruto (*raw data*), sin necesidad de transformarlos o definir un esquema previamente. Puede albergar simultáneamente datos estructurados, semiestructurados y no estructurados, difiriendo la estructura hasta el momento de la consulta (*Schema-on-read*). Ofrece gran flexibilidad y bajo coste, siendo el entorno idóneo para científicos de datos, ingenieros de machine learning y análisis exploratorio (ejemplos: *AWS Lake Formation*, *Apache HDFS*, *Azure Data Lake Storage*).
 
 Su arquitectura contempla: Fuentes $\rightarrow$ Ingesta (por lotes o streaming) $\rightarrow$ Almacenamiento desacoplado (capas *Raw/Landing*, *Transform* y *Processed*) junto a entornos de experimentación (*Sandboxes*) $\rightarrow$ Consumo para analítica avanzada y BI.
 
-#### C. Data Lakehouse
+### C. Data Lakehouse
 
 Representa el paradigma arquitectónico más reciente, combinando las principales ventajas de ambos mundos: la escalabilidad, bajo coste y flexibilidad con datos crudos del Data Lake, junto con las capacidades de gestión de transacciones, estructura y optimización de consultas SQL del Data Warehouse.
 
@@ -121,7 +117,7 @@ Sus características fundamentales incluyen:
 - **Alto rendimiento y escalabilidad:** Aplica técnicas de indexación avanzada, almacenamiento columnar y sistemas de caché para optimizar el acceso a petabytes de información.
 
 
-#### Capas de la arquitectura Data Lakehouse
+### Capas de la arquitectura Data Lakehouse
 
 1. **Fuentes de datos:** Orígenes transaccionales, APIs, ficheros JSON/XML, multimedia y flujos continuos.
 2. **Capa de ingestión:** Procesos de captura tanto por lotes (*batch*) como en tiempo real (*streaming*).

@@ -4,18 +4,14 @@
 
 Módulo:                     SISTEMAS DE BIG DATA
 Profesor:                   Víctor J. González
-Unidad de Trabajo:          UT01. Introducción al Big Data
+Unidad de Trabajo:          UT01. INTRODUCCÓN AL BIG DATA
 Apartado:                   4.- Ejemplos reales de uso de Big Data
 Resultados de aprendizaje:  ?
 ```
 
+# 4. Ejemplos reales de uso de Big Data
 
-# UT01. INTRODUCCIÓN AL BIG DATA
-
-
-## 4. Ejemplos reales de uso de Big Data
-
-### 4.1. Netflix: Personalización extrema y producción de contenidos
+## 4.1. Netflix: Personalización extrema y producción de contenidos
 
 Netflix aprovecha los datos generados por más de 230 millones de suscriptores para maximizar la retención de clientes y optimizar sus inversiones en catálogo. 
 
@@ -32,7 +28,7 @@ Captura datos como hábitos de consumo (tiempo de sesión, dispositivos, fechas 
 
 
 
-#### Aplicación de las 5 V's en Netflix
+### Aplicación de las 5 V's en Netflix
 
 - **Volumen:** Cientos de petabytes procedentes de la actividad audiovisual de más de 230 millones de usuarios.
 - **Velocidad:** Ingesta y análisis en tiempo real para modificar recomendaciones de forma dinámica mientras el usuario navega.
@@ -41,7 +37,7 @@ Captura datos como hábitos de consumo (tiempo de sesión, dispositivos, fechas 
 - **Valor:** Reducción de la tasa de cancelación (*churn*) y garantía de éxito en nuevas inversiones. Se estima que su motor de recomendación ahorra más de 1.000 millones de dólares anuales en retención, influyendo en más del 80% de los títulos reproducidos mediante la categorización en más de 2.000 microgéneros.
 
 
-#### Técnicas algorítmicas y experimentación
+### Técnicas algorítmicas y experimentación
 
 - **Filtrado colaborativo y Machine Learning:** Comparación del comportamiento del usuario con perfiles de gustos similares y análisis de metadatos de las obras (género, ritmo narrativo, reparto).
 - **Personalización visual:** Generación y asignación de miniaturas dinámicas según los intereses del usuario (destacando a un actor concreto o acentuando el componente de acción o romance).
@@ -49,11 +45,11 @@ Captura datos como hábitos de consumo (tiempo de sesión, dispositivos, fechas 
 - **Producción basada en datos (*Data-Driven Content*):** La creación de la serie *House of Cards* (2013) supuso una inversión pionera de 100 millones de dólares decidida tras constatar en los datos la popularidad de la serie británica original, el alto seguimiento del director David Fincher, el interés por los dramas políticos y las búsquedas del actor Kevin Spacey; un modelo predictivo repetido en éxitos como *Stranger Things*, *Gambito de dama* o *A ciegas*.
 
 
-### 4.2. Google Maps: Tráfico en tiempo real y rutas inteligentes
+## 4.2. Google Maps: Tráfico en tiempo real y rutas inteligentes
 
 Google Maps da servicio a más de 1.000 millones de usuarios activos mensuales manteniendo un 99,9% de disponibilidad.
 
-#### Aplicación de las 5 V's en Google Maps
+### Aplicación de las 5 V's en Google Maps
 
 - **Volumen:** Emisión masiva y continua de coordenadas y telemetría desde cientos de millones de terminales móviles.
 - **Velocidad:** Tiempos de respuesta y recálculo inferiores a un segundo para detectar incidentes y adaptar las rutas en marcha.
@@ -61,7 +57,7 @@ Google Maps da servicio a más de 1.000 millones de usuarios activos mensuales m
 - **Veracidad:** Filtrado algorítmico de errores de precisión satelital y lecturas erráticas en túneles o vías secundarias.
 - **Valor:** Reducción del 20% en retrasos imprevistos, ahorro de un 22% en tiempos de viaje y reducción de 2,1 millones de toneladas anuales de emisiones de $\text{CO}_2$ a nivel global.
 
-#### Funcionalidades avanzadas
+### Funcionalidades avanzadas
 
 - **Predicción de tráfico y tiempo estimado de llegada (ETA):** Modelos de regresión que cruzan el histórico de la vía, obras, fases semafóricas y el comportamiento de la flota en tiempo real (si el 70% de vehículos reducen velocidad, se infiere una retención), logrando precisiones del 97% en grandes ciudades.
 - **Rutas ecológicas:** Combinación de datos topográficos (pendientes), patrones de frenado y fluidez para trazar itinerarios que minimizan el consumo de combustible.
@@ -70,11 +66,11 @@ Google Maps da servicio a más de 1.000 millones de usuarios activos mensuales m
 
 
 
-### 4.3. Amazon: Recomendación predictiva y logística
+## 4.3. Amazon: Recomendación predictiva y logística
 
 Amazon gestiona su operativa mundial sobre un *Data Lake* que procesa más de 1,5 petabytes de información.
 
-#### Aplicación de las 5 V's en Amazon
+### Aplicación de las 5 V's en Amazon
 
 - **Volumen:** Millones de transacciones por segundo, clics de navegación, reseñas de producto y catálogo global.
 - **Velocidad:** Generación de recomendaciones en milisegundos y optimización de rutas para posibilitar entregas en menos de 24 horas (Amazon Prime).
@@ -82,7 +78,7 @@ Amazon gestiona su operativa mundial sobre un *Data Lake* que procesa más de 1,
 - **Veracidad:** Detección de reseñas fraudulentas, eliminación de duplicados y conciliación de stock en tiempo real.
 - **Valor:** El motor de recomendaciones impulsa aproximadamente el 35% de las ventas totales de la plataforma y optimiza la rentabilidad operativa.
 
-#### Casos de uso destacados
+### Casos de uso destacados
 
 - **Previsión de demanda e inventario:** Análisis de estacionalidad, noticias y tendencias para ubicar físicamente los productos en los centros logísticos más cercanos antes de que el usuario efectúe la compra.
 - **Precios dinámicos:** Algoritmos que modifican los precios de millones de artículos varias veces al día atendiendo al stock disponible, precios de la competencia y elasticidad de la demanda.
@@ -90,11 +86,11 @@ Amazon gestiona su operativa mundial sobre un *Data Lake* que procesa más de 1,
 
 
 
-### 4.4. Sistema sanitario y datos epidemiológicos
+## 4.4. Sistema sanitario y datos epidemiológicos
 
 El sector de la salud procesa desde terabytes hasta petabytes de datos clínicos para transformar la medicina reactiva en preventiva y personalizada.
 
-#### Aplicación de las 5 V's en Sanidad
+### Aplicación de las 5 V's en Sanidad
 
 - **Volumen:** Historiales clínicos electrónicos de millones de pacientes, secuencias genéticas completas e imágenes radiológicas.
 - **Velocidad:** Detección de brotes infecciosos en tiempo casi real y gestión inmediata de ocupación de camas de UCI.
@@ -103,7 +99,7 @@ El sector de la salud procesa desde terabytes hasta petabytes de datos clínicos
 - **Valor:** Diagnósticos precoces, optimización del gasto hospitalario y diseño de terapias a medida que salvan vidas.
 
 
-#### Aplicaciones prácticas
+### Aplicaciones prácticas
 
 - **Medicina de precisión y genómica:** Identificación de biomarcadores moleculares para anticipar la respuesta a fármacos en oncología.
 - **Diagnóstico asistido por IA:** Redes neuronales aplicadas a la detección precoz de tumores en radiología o diagnóstico de patologías raras.
@@ -111,11 +107,11 @@ El sector de la salud procesa desde terabytes hasta petabytes de datos clínicos
 
 
 
-### 4.5. Smart Cities (Ciudades Inteligentes)
+## 4.5. Smart Cities (Ciudades Inteligentes)
 
 Las ciudades inteligentes capturan flujos masivos de datos para garantizar la sostenibilidad ambiental y mejorar la calidad de vida urbana.
 
-#### Aplicación de las 5 V's en Smart Cities
+### Aplicación de las 5 V's en Smart Cities
 
 - **Volumen:** Petabytes diarios originados en redes de transporte, contadores de consumo, cámaras urbanas y sensores ambientales.
 - **Velocidad:** Actuación en segundos para gestionar atascos, picos de polución o emergencias urbanas.
@@ -124,7 +120,7 @@ Las ciudades inteligentes capturan flujos masivos de datos para garantizar la so
 - **Valor:** Disminución del gasto municipal, reducción de la huella de carbono y mayor eficiencia en servicios esenciales.
 
 
-#### Ejemplos de implementación urbana
+### Ejemplos de implementación urbana
 
 - **Gestión de tráfico y transporte:** Sincronización dinámica de fases semafóricas según la densidad del flujo y reprogramación de frecuencias de autobuses en tiempo real.
 - **Alumbrado inteligente:** Farolas con sensores que regulan automáticamente la intensidad lumínica según la luz ambiental y el tránsito peatonal (ejemplo implementado en Ámsterdam).
