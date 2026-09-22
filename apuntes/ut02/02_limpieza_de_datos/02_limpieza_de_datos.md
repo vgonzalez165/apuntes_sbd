@@ -1,10 +1,21 @@
+```
+------------- ESPECIALIZACIÓN EN INTELIGENCIA ARTIFICIAL Y BIG DATA -------------
+---------------------------------------------------------------------------------
+
+Módulo:                     SISTEMAS DE BIG DATA
+Profesor:                   Víctor J. González
+Unidad de Trabajo:          UT02. PERSISTENCIA DOCUMENTAL, CACHÉ Y PROCESAMIENTO ETL
+Apartado:                   2.- Limpieza de datos
+Resultados de aprendizaje:  ?
+```
+
+# 2.- Limpieza de datos con Pandas
+
+
 TODO: HAY QUE REVISAR TODO ESTO BIEN
 
-En los ecosistemas de producción de Inteligencia Artificial y Big Data, la limpieza de datos (*Data Cleansing* o *Data Scrubbing*) constituye la base de la fiabilidad del sistema. Los algoritmos de aprendizaje automático no distinguen entre patrones reales y anomalías estructurales; asumen que los datos reflejan fielmente el dominio del problema. Si los datos de entrada contienen ruido, sesgos, formatos heterogéneos o datos nulos mal gestionados, el modelo sufrirá el principio *Garbage In, Garbage Out*.
 
-
-
-## 1. Entorno de Pruebas: Creación del Dataset "Sucio"
+## 2.1. Datos de pruebas: creación del dataset "sucio"
 
 Para comprender el alcance de los problemas habituales, utilizaremos un conjunto de datos que concentra las patologías más frecuentes de fuentes heterogéneas (APIs, logs desestructurados, volcados SQL sin restricciones):
 
@@ -73,11 +84,10 @@ df = pd.DataFrame(raw_data)
 
 ```
 
----
 
-## 2. Auditoría y Diagnóstico Estructural (*Data Profiling*)
+## 2.2. Auditoría y Diagnóstico Estructural (*Data Profiling*)
 
-Antes de modificar un solo registro, es imperativo realizar un análisis cuantitativo del estado del DataFrame. En proyectos con millones de filas no es posible examinar los datos visualmente.
+Antes de modificar un solo registro, es necesario realizar un análisis cuantitativo del estado del DataFrame. En proyectos con millones de filas no es posible examinar los datos visualmente, por lo que necesitamos analizar cada una de las columnas usando Python.
 
 ```python
 # 1. Resumen estructural: tipos asignados y uso de memoria real
@@ -98,21 +108,21 @@ print(nulos_resumen)
 
 ```
 
-### Conceptos clave
+Algunas conclusiones que podemos obtener de este estudio:
 
-* **Uso de memoria con `deep=True`:** Pandas por defecto solo inspecciona punteros de memoria para columnas de tipo `object`. Con `deep=True` analiza el tamaño real de las cadenas en memoria RAM, un factor crítico en Big Data.
-* **Inconsistencia de tipos:** Observar cómo la columna `edad` fue inferida como `object` debido a la presencia combinada de cadenas (`"cuarenta"`), enteros y nulos (`np.nan`).
+- **Uso de memoria con `deep=True`:** Pandas por defecto solo inspecciona punteros de memoria para columnas de tipo `object`. Con `deep=True` analiza el tamaño real de las cadenas en memoria RAM, un factor crítico en Big Data.
+- **Inconsistencia de tipos:** observa cómo la columna `edad` fue inferida como `object` debido a la presencia combinada de cadenas (`"cuarenta"`), enteros y nulos (`np.nan`).
 
----
 
-## 3. Integridad de Claves y Gestión de Duplicados
 
-La duplicidad de registros falsea la cardinalidad de los datos e invalida las métricas de evaluación en modelos predictivos. Si un registro idéntico aparece en el conjunto de entrenamiento (*train*) y en el de prueba (*test*), se produce una **fuga de datos** (*Data Leakage*), reportando un rendimiento artificialmente optimista.
+## 2.3. Integridad de claves y gestión de duplicados
+
+La duplicidad de registros falsea la cardinalidad de los datos e invalida las métricas de evaluación en modelos predictivos. Si un registro idéntico aparece en el conjunto de entrenamiento (*train*) y en el de prueba (*test*), se produce una **fuga de datos**, reportando un rendimiento artificialmente optimista.
 
 Existen dos tipos de duplicados:
 
-1. **Duplicados completos:** Todas las columnas contienen exactamente los mismos valores.
-2. **Duplicados lógicos o de clave primaria:** Registros que repiten el identificador de negocio pero difieren en algún atributo secundario (frecuente en fallos de ingesta o reintentos de red).
+1. **Duplicados completos:** todas las columnas contienen exactamente los mismos valores.
+2. **Duplicados lógicos o de clave primaria:** registros que repiten el identificador de negocio pero difieren en algún atributo secundario (frecuente en fallos de ingesta o reintentos de red).
 
 ```python
 # Identificar duplicados completos
@@ -136,16 +146,15 @@ if duplicados_id.any():
     df = df.drop_duplicates(subset=["cliente_id"], keep="first").reset_index(
         drop=True
     )
-
 ```
 
 
 
-## 4. Coerción de Tipos de Datos (*Type Casting*) y Optimización de Memoria
+## 2.4. Coerción de tipos de datos y optimización de memoria
 
 Pandas utiliza tipos de NumPy bajo el capó, pero muchas conversiones requieren control estricto de excepciones para evitar que el proceso falle ante valores no estandarizados.
 
-### Conversión Numérica con Coerción de Excepciones
+### Conversión numérica con coerción de excepciones
 
 El parámetro `errors='coerce'` sustituye de forma silenciosa cualquier elemento no convertible por `NaN`.
 
@@ -160,10 +169,9 @@ df["edad"] = df["edad"].astype("Int64")
 df["es_activo"] = pd.to_numeric(df["es_activo"], errors="coerce").astype(
     "boolean"
 )
-
 ```
 
-### Estandarización de Fechas Heterogéneas
+### Estandarización de fechas heterogéneas
 
 En ingestas de Big Data es común recibir fechas en formatos dispares (ISO 8601, formato europeo `DD/MM/YYYY`, marcas de tiempo UNIX o textos inválidos).
 
@@ -173,7 +181,6 @@ En ingestas de Big Data es común recibir fechas en formatos dispares (ISO 8601,
 df["fecha_alta"] = pd.to_datetime(
     df["fecha_alta"], format="mixed", errors="coerce"
 )
-
 ```
 
 ### Optimización con `CategoricalDtype`
@@ -193,12 +200,9 @@ print(
     df["categoria"].memory_usage(deep=True),
     "bytes",
 )
-
 ```
 
----
-
-## 5. Limpieza Vectorizada de Texto y Normalización Categórica
+## 2.5. Limpieza vectorizada de texto y normalización categórica
 
 El uso de bucles (`for`) o de la función `.apply()` con funciones Python nativas es un antipatrón en Pandas: opera en el intérprete de Python e invalida las optimizaciones vectorizadas de C/Cython. Las operaciones sobre texto deben realizarse siempre a través del accesor `.str`.
 
@@ -220,18 +224,18 @@ df["categoria"] = df["categoria"].replace(valores_centinela, np.nan)
 
 # Re-categorizar tras la homogeneización
 df["categoria"] = df["categoria"].astype("category")
-
 ```
 
----
 
-## 6. Tratamiento Sistemático de Valores Nulos (*Missing Data*)
+## 2.6. Tratamiento de valores nulos
 
 El tratamiento de valores faltantes depende de la naturaleza probabilística de la pérdida:
 
-* **MCAR (*Missing Completely at Random*):** La pérdida es independiente de cualquier variable. Eliminar registros suele ser seguro si el volumen es bajo.
-* **MAR (*Missing at Random*):** La pérdida depende de otras variables observadas (ej. la probabilidad de no declarar ingresos depende del nivel educativo).
-* **MNAR (*Missing Not at Random*):** La falta del dato depende del propio valor ausente (ej. personas con ingresos muy altos o muy bajos evitan declarar sus ingresos). Rellenar con la media introduce un sesgo severo.
+- **MCAR (*Missing Completely at Random*):** la pérdida es independiente de cualquier variable. Eliminar registros suele ser seguro si el volumen es bajo.
+- **MAR (*Missing at Random*):** la pérdida depende de otras variables observadas (ej. la probabilidad de no declarar ingresos depende del nivel educativo).
+- **MNAR (*Missing Not at Random*):** la falta del dato depende del propio valor ausente (ej. personas con ingresos muy altos o muy bajos evitan declarar sus ingresos). Rellenar con la media introduce un sesgo severo.
+
+![Qué hacer con los NaN?](nan.png)
 
 ```
                                  ¿Qué hacer con los NaN?
@@ -264,7 +268,7 @@ El tratamiento de valores faltantes depende de la naturaleza probabilística de 
 
 ```
 
-### Implementación en Código
+### Implementación en código
 
 ```python
 # Regla 1: Descartar registros donde el identificador o la fecha de alta sean irrecuperables
@@ -296,11 +300,9 @@ df["categoria"] = (
 
 ```
 
-> **Principio de Prevención de Fugas de Datos (*Data Leakage*):** En flujos de Machine Learning, cualquier estadístico (la media, la mediana, la moda o la matriz de correlación) debe calcularse **estrictamente sobre el conjunto de entrenamiento**. Aplicar `df.fillna(df.mean())` a todo el dataset antes de la partición (*train/test split*) contamina los datos de entrenamiento con información de la distribución del conjunto de evaluación.
 
----
 
-## 7. Detección y Tratamiento de Valores Atípicos (*Outliers*)
+## 2.7. Detección y tratamiento de valores atípicos (*Outliers*)
 
 Un valor atípico puede responder a un error de captura (edad = -5 o 150) o a una variabilidad extrema real (ingresos = 850.000 €). No todos los valores extremos deben eliminarse: descartar anomalías legítimas empobrece la capacidad del modelo para generalizar o para tareas de detección de fraude.
 
@@ -351,47 +353,46 @@ print("Registros anómalos detectados:\n", outliers_ingresos)
 
 Dependiendo del algoritmo final:
 
-1. **Recorte (*Trimming*):** Eliminar la fila. Útil si la muestra es masiva y el dato es claramente defectuoso.
-2. **Acotamiento (*Winsorization / Capping*):** Reemplazar los valores más allá de los umbrales por el valor del umbral superior o inferior. Mantiene el tamaño muestral sin distorsionar la varianza.
-3. **Transformación Logarítmica:** Para distribuciones con asimetría positiva (*right-skewed*), comprimir la escala mediante $\log(1 + x)$.
+1. **Recorte (*Trimming*):** eliminar la fila. Útil si la muestra es masiva y el dato es claramente defectuoso.
+2. **Acotamiento (*Winsorization / Capping*):** reemplazar los valores más allá de los umbrales por el valor del umbral superior o inferior. Mantiene el tamaño muestral sin distorsionar la varianza.
+3. **Transformación logarítmica:** para distribuciones con asimetría positiva (*right-skewed*), comprimir la escala mediante $\log(1 + x)$.
 
 ```python
 # Opción: Capping o acotado con .clip()
 df["ingresos_anuales_capped"] = df["ingresos_anuales"].clip(
     lower=lim_inf_ingresos, upper=lim_sup_ingresos
 )
-
 ```
 
----
 
-## 8. Arquitectura Funcional de Producción: *Method Chaining* y `.pipe()`
+
+## 2.8. Arquitectura funcional de producción: *Method Chaining* y `.pipe()`
 
 En la industria del software y la ingeniería de datos, el código disperso en celdas de Jupyter Notebook con mutaciones de estado sobre la misma variable (`df['x'] = ...`) es fuente recurrente de fallos silenciosos y dificulta las pruebas unitarias.
 
 El patrón recomendado consiste en componer funciones puras mediante el método `.pipe()`, permitiendo una lectura secuencial idéntica a un pipeline declarativo de datos:
 
 ```python
-def auditar_claves(data: pd.DataFrame, id_col: str) -> pd.DataFrame:
+def auditar_claves(data: pd.DataFrame, id_col):
     """Elimina duplicados garantizando unicidad de identificador."""
     return data.drop_duplicates(subset=[id_col], keep="first").copy()
 
 
-def estandarizar_cadenas(data: pd.DataFrame) -> pd.DataFrame:
+def estandarizar_cadenas(data):
     """Homogeneiza formatos de texto y capitalización."""
     data = data.copy()
     data["nombre"] = data["nombre"].str.strip().str.title()
     data["categoria"] = (
         data["categoria"]
-        .astype(str)
-        .str.strip()
-        .str.lower()
-        .replace(["?", "desconocido", "n/d", "none", "nan"], np.nan)
+            .astype(str)
+            .str.strip()
+            .str.lower()
+            .replace(["?", "desconocido", "n/d", "none", "nan"], np.nan)
     )
     return data
 
 
-def transformar_tipos(data: pd.DataFrame) -> pd.DataFrame:
+def transformar_tipos(data):
     """Fuerza tipado correcto con coerción de errores."""
     data = data.copy()
     data["edad"] = pd.to_numeric(data["edad"], errors="coerce")
@@ -404,7 +405,7 @@ def transformar_tipos(data: pd.DataFrame) -> pd.DataFrame:
     return data
 
 
-def tratar_valores_extremos(data: pd.DataFrame) -> pd.DataFrame:
+def tratar_valores_extremos(data):
     """Aplica filtros de dominio y capping a distribuciones numéricas."""
     data = data.copy()
     # Corrección biológica
@@ -422,7 +423,7 @@ def tratar_valores_extremos(data: pd.DataFrame) -> pd.DataFrame:
     return data
 
 
-def imputar_nulos(data: pd.DataFrame) -> pd.DataFrame:
+def imputar_nulos(data):
     """Aplica estrategias de imputación univariante y por contexto."""
     data = data.copy()
     # Descarte de nulos críticos
@@ -441,7 +442,7 @@ def imputar_nulos(data: pd.DataFrame) -> pd.DataFrame:
 
 ```
 
-### Ejecución del Pipeline Unificado
+### Ejecución del pipeline unificado
 
 ```python
 # Pipeline completo estructurado de forma legible, reproducible y testeable
