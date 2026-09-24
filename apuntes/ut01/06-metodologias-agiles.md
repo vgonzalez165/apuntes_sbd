@@ -52,11 +52,11 @@ Al disponer de **2 horas lectivas semanales**, la clase presencial no es para "e
 
 En este curso **todos los miembros son perfiles técnicos y todos programan/configuran**. Nadie asume un rol puramente burocrático. Los roles de gestión **rotarán**.
 
-| Rol                    | Responsabilidad Ágil                                                                                                      | Responsabilidad Técnica en el Reto |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| Rol                    | Responsabilidad Ágil                                                                                                      | Responsabilidad Técnica en el Reto                                                              |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
 | **Product Owner (PO)** | Prioriza el Backlog, valida que el incremento cumpla los criterios de aceptación y se comunica con el profesor (cliente). | Valida esquemas de datos, define pipelines y comprueba que la salida de los datos sea correcta. |
-| **Scrum Master (SM)**  | Vela por el cumplimiento de la metodología, gestiona el tablero Kanban y elimina bloqueos de equipo/entorno.              | Lidera la infraestructura, repositorios Git, scripts de despliegue (`docker-compose`) y ramas. |
-| **Data Engineer**      | El resto de miembros del equipo. Estiman y desarrolla tareas del Sprint Backlog. | Focalizado en ingesta de fuentes, almacenamiento distribuido y conectores. |
+| **Scrum Master (SM)**  | Vela por el cumplimiento de la metodología, gestiona el tablero Kanban y elimina bloqueos de equipo/entorno.              | Lidera la infraestructura, repositorios Git, scripts de despliegue (`docker-compose`) y ramas.  |
+| **Data Engineer**      | El resto de miembros del equipo. Estiman y desarrolla tareas del Sprint Backlog.                                          | Focalizado en ingesta de fuentes, almacenamiento distribuido y conectores.                      |
 
 
 
@@ -106,7 +106,7 @@ Una tarea técnica en Big Data no pasa a la columna **Done** solo porque alguien
 ```
 
 
-## 6. ¿Qué hacemos en casa semana?
+## 6. ¿Qué hacemos en cada semana?
 
 ### 1. Sprint Planning (Al iniciar la clase)
 
