@@ -85,7 +85,7 @@ df = pd.DataFrame(raw_data)
 ```
 
 
-## 2.2. Auditoría y Diagnóstico Estructural (*Data Profiling*)
+## 2.2. Auditoría de los datos
 
 Antes de modificar un solo registro, es necesario realizar un análisis cuantitativo del estado del DataFrame. En proyectos con millones de filas no es posible examinar los datos visualmente, por lo que necesitamos analizar cada una de las columnas usando Python.
 
