@@ -10,21 +10,21 @@
 
 ## Planificación y secuenciación didáctica (12 horas)
 
-| **Semana** | **Fase**      | **Explicación**| **Trabajo**                                       | **Entregable** |
-| ------ | ----------------- | -------------- | ------------------------------------------------- | ---------- |
-| **1** | Comprensión de negocio | Contenedores   | Configuración entorno base y exploración datasets |  Repositorio Git inicial con stack Docker funcional y análisis exploratorio preliminar |
-| **2** | Preparación de datos   | Técnicas de saneamiento. Optimización de tipos                     | Script ETL para normalizar fuentes sucias | Script `etl_cleaner.py` ejecutable y reporte de calidad del dato |
-| **3** | Modelado de datos      | MongoDB        | Carga de datos en MongoDB y consultas             | Módulo de persistencia documental y tres consultas analíticas. |
-| **4** | Modelado de datos      | Redis          | Lógica del sistema de triaje en tiempo real       | Módulo Redis para encolar pacientes y asignar boxes |
-| **5** | Integración End-to-End | Conexión de componentes | Taller?                                  | Pipeline integrado ejecutable mediante script lanzador. |
-| **6** | *Live Demo* por equipos|    |                                                               | Entrega final del repositorio, documentación técnica y defensa. |
+| **Semana** | **Fase**                | **Explicación**                                | **Trabajo**                                       | **Entregable**                                                                        |
+| ---------- | ----------------------- | ---------------------------------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| **1**      | Comprensión de negocio  | Contenedores                                   | Configuración entorno base y exploración datasets | Repositorio Git inicial con stack Docker funcional y análisis exploratorio preliminar |
+| **2**      | Preparación de datos    | Técnicas de saneamiento. Optimización de tipos | Script ETL para normalizar fuentes sucias         | Script `etl_cleaner.py` ejecutable y reporte de calidad del dato                      |
+| **3**      | Modelado de datos       | MongoDB                                        | Carga de datos en MongoDB y consultas             | Módulo de persistencia documental y tres consultas analíticas.                        |
+| **4**      | Modelado de datos       | Redis                                          | Lógica del sistema de triaje en tiempo real       | Módulo Redis para encolar pacientes y asignar boxes                                   |
+| **5**      | Integración End-to-End  | Conexión de componentes                        | Taller?                                           | Pipeline integrado ejecutable mediante script lanzador.                               |
+| **6**      | *Live Demo* por equipos |                                                |                                                   | Entrega final del repositorio, documentación técnica y defensa.                       |
 
 
 
 
-| Semana / Sesión (2h) | Fase CRISP-DM y Contenidos técnicos | Dinámica en el aula | Entregable de sprint |
-| ----------------- | --- | --- | --- |
-| **Semana 1 (2h)** | *Business & Data Understanding*. Despliegue de infraestructura con `docker-compose` (MongoDB + Redis). | **Píldora (30 min):** Persistencia políglota y contenedores.<br
+| Semana / Sesión (2h) | Fase CRISP-DM y Contenidos técnicos                                                                    | Dinámica en el aula                                             | Entregable de sprint |
+| -------------------- | ------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------- | -------------------- |
+| **Semana 1 (2h)**    | *Business & Data Understanding*. Despliegue de infraestructura con `docker-compose` (MongoDB + Redis). | **Píldora (30 min):** Persistencia políglota y contenedores.<br |                      |
 <br>**Taller (90 min):** Configuración del entorno base y exploración inicial de los datasets crudos. | Repositorio Git inicial con stack Docker funcional y análisis exploratorio preliminar. |
 | **Semana 2 (2h)** | *Data Preparation*. Ingesta y limpieza masiva con Python Pandas. Tratamiento de nulos, tipos inconsistentes y parseo temporal. | **Píldora (20 min):** Técnicas de saneamiento y optimización de tipos con Pandas.
 <br>**Taller (100 min):** Desarrollo del script ETL para normalizar las fuentes sucias. | Script `etl_cleaner.py` ejecutable y reporte de calidad del dato. |
