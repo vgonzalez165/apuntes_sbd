@@ -1,34 +1,38 @@
-# Reto 1: Modernización y Persistencia Políglota del Sistema de Urgencias Hospitalarias (*CareStream*)
+```
+------------- ESPECIALIZACIÓN EN INTELIGENCIA ARTIFICIAL Y BIG DATA -------------
+---------------------------------------------------------------------------------
 
-- **Módulo:** Sistemas de Big Data (Curso de Especialización en IA y Big Data)
-- **Duración:** 7 semanas (14 horas presenciales de taller + trabajo de equipo)
-- **Organización:** Equipos de 3 alumnos bajo metodología *Scrumban*
-- **Resultados de Aprendizaje y Criterios evaluados:**
-  - **RA 1 (Criterios c, d, f):** Integración de fuentes heterogéneas, construcción de datos complejos y selección de arquitecturas NoSQL.
-  - **RA 3 (Criterios a, b, d):** Extracción y almacenamiento políglota, eficiencia en valor analítico, contenerización y seguridad/normativa de datos.
+Módulo:                     SISTEMAS DE BIG DATA
+Profesor:                   Víctor J. González
+Unidad de Trabajo:          UT02. Persistencia documental, caché y procesamiento ETL
+Reto:                       1. Sistema de triaje y trazabilidad de urgencias hospitalarias
+Duración:                   7 semanas (14 horas presenciales + trabajo en equipo)
+Resultados de aprendizaje:  RA1 (Criterios c, d, f). Integración de fuentes heterogéneas, construcción de datos complejos y selección de arquitecturas NoSQL.
+                            RA3 (Criterios a, b, d). Extracción y almacenamiento políglota, eficiencia en valor analítico, contenerización y seguridad/normativa de datos.
+```
 
 
+# Reto 1: SISTEMA DE TRIAJE Y TRAZABILIDAD EN URGENCIAS HOSPITALARIAS
 
 
+## 1. Contexto del reto
 
-## 1. Contexto del Reto y Misión
+La gerencia de un hospital ha puesto en marcha el proyecto de modernización de su servicio de urgencias. Hasta ahora, el hospital operaba con dos sistemas aislados y heredados:
 
-La gerencia del Hospital Universitario ha puesto en marcha el proyecto de modernización de su servicio de urgencias. Hasta ahora, el hospital operaba con dos sistemas aislados y heredados:
-
-1. **Sistema de Gestión de Pacientes (Admisiones):** Un volcado relacional plano en CSV con incidencias administrativas, formatos de fecha caóticos y altas clínicas.
-2. **Sistema Departamental de Triaje:** Ficheros JSON semiestructurados donde el equipo médico cumplimenta la valoración clínica y constantes vitales con esquemas polimórficos variables.
+1. **Sistema de gestión de pacientes (admisiones):** un volcado relacional plano en CSV con incidencias administrativas, formatos de fecha caóticos y altas clínicas.
+2. **Sistema departamental de triaje:** ficheros JSON semiestructurados donde el equipo médico cumplimenta durante el proceso de triaje la valoración clínica y constantes vitales con esquemas polimórficos variables.
 
 Para acabar con los problemas de escalabilidad y los tiempos ciegos en la sala de espera, el hospital ha decidido dar dos pasos estratégicos:
 
-* **Fase Batch (Histórico):** Saneamiento, cruce y migración de todos los episodios históricos cerrados hacia una base de datos documental centralizada (**MongoDB**).
-* **Fase Near Real-Time (Tiempo Real):** Publicación de las nuevas llegadas y altas a través de una **API REST corporativa**. Estas novedades deben ser absorbidas en tiempo real por un motor de colas en memoria (**Redis**) para gestionar al milisegundo la prioridad de entrada a boxes. Una vez que la API notifica el alta del paciente, su episodio debe quedar consolidado de forma definitiva en MongoDB y desaparecer de la memoria volátil de Redis.
+- **Fase Batch (Histórico):** saneamiento, cruce y migración de todos los episodios históricos cerrados hacia una base de datos documental centralizada (**MongoDB**).
+- **Fase Near Real-Time (Tiempo Real):** publicación de las nuevas llegadas y altas a través de una **API REST corporativa**. Estas novedades deben ser absorbidas en tiempo real por un motor de colas en memoria (**Redis**) para gestionar al milisegundo la prioridad de entrada a boxes. Una vez que la API notifica el alta del paciente, su episodio debe quedar consolidado de forma definitiva en MongoDB y desaparecer de la memoria volátil de Redis.
 
 Vuestro equipo de ingeniería de datos debe desplegar la infraestructura, programar los pipelines de migración y construir el agente de ingestión que atienda las admisiones en tiempo real.
 
 
 ## 2. Arquitectura Global de la Solución
 
-```mermaid
+<div class="mermaid">
 flowchart TD
     %% Estilos de nodos y colores
     classDef inputStyle fill:#e1f5fe,stroke:#0288d1,stroke-width:2px,color:#01579b;
@@ -80,116 +84,112 @@ flowchart TD
     %% Conexiones entre componentes
     ANON -- "Carga inicial histórica" --> MONGO
     HASHES -- "Al recibir 'pacientes_alta':<br>1. Liberar Box<br>2. Cierre definitivo del episodio<br>3. Borrar de Redis" --> MONGO
-
-```
-
-
-
-## 3. Especificaciones Técnicas del Proyecto
-
-### A. Infraestructura Contenerizada (`docker-compose.yml`)
-
-* **MongoDB (v6.x o superior):** Con volumen persistente montado en disco local y puerto expuesto (`27017`).
-* **Redis (v7.x o superior):** Desplegado en el mismo puente de red de Docker y puerto expuesto (`6379`).
-* El entorno debe levantarse de forma totalmente reproducible mediante el comando estándar: `docker compose up -d`.
-
-### B. Migración del Histórico (ETL con Pandas $\rightarrow$ MongoDB)
-
-* Limpieza del dataset suministrado (`admisiones_historico.csv` y `partes_clinicos.json`):
-* Unificación de fechas heterogéneas (ISO, europeas, timestamps) a formato `datetime` estándar.
-* Depuración de anomalías fisiológicas (frecuencias cardíacas negativas o imposibles) y normalización de textos (`destino_alta`).
-* Eliminación de duplicados y cruce (*merge*) por la clave unívoca `id_episodio`.
-
-
-* Persistencia en la colección `episodios_urgencias` de MongoDB.
-* **Consultas de Analítica Histórica (Agregaciones en MongoDB):**
-1. Tiempo medio de estancia (en minutos) por cada categoría patológica de triaje.
-2. Distribución porcentual de destinos al alta (domicilio vs. ingreso en planta) según grupos de edad.
+</div>
 
 
 
-### C. Consumo de la API REST y Motor de Tiempo Real (Redis)
+## 3. Especificaciones técnicas del proyecto
 
-* La API pública del hospital expone el endpoint:
-`GET http://<host>:8000/api/v1/urgencias/novedades`
-* Vuestro script agente (`urgencias_worker.py`) consultará este endpoint **cada 5 segundos**.
+El proyecto debe cumplir con las siguientes especificaciones:
 
-#### Estructura de la Respuesta de la API
+### A. Infraestructura contenerizada (`docker-compose.yml`)
 
-```json
-{
-  "timestamp_consulta": 1727192400.0,
-  "total_nuevos": 1,
-  "total_altas": 1,
-  "nuevos_ingresos": [
-    {
-      "id_episodio": "EP-2026-50001",
-      "datos_admision": {
-        "sip_paciente": "SIP-849201",
-        "nombre": "Ana García",
-        "edad": 62,
-        "motivo_consulta": "Dolor torácico opresivo",
-        "timestamp_llegada": 1727192395.0,
-        "fecha_hora_texto": "2026-09-24 17:39:55"
-      },
-      "datos_triaje": {
-        "nivel_manchester": 2,
-        "color": "naranja",
-        "categoria_patologia": "Cardiovascular",
-        "tiempo_max_espera_min": 10,
-        "constantes": { "temperatura_c": 36.8, "frecuencia_cardiaca": 98, "tension_arterial": "140/90" },
-        "antecedentes": ["hipertension", "diabetes"],
-        "alergias": ["penicilina"],
-        "modulo_cardiologia": { "ecg_realizado": true, "troponinas_ng_ml": 0.42 }
+- **MongoDB (v6.x o superior):** con volumen persistente montado en disco local y puerto expuesto (`27017`).
+- **Redis (v7.x o superior):** desplegado en el mismo puente de red de Docker y puerto expuesto (`6379`).
+- Contenedor que ejecute el código Python con toda la lógica del sistema
+- El entorno debe levantarse de forma totalmente reproducible mediante el comando estándar: `docker compose up -d`.
+
+
+### B. Migración del histórico (ETL con Pandas $\rightarrow$ MongoDB)
+
+El primer proceso a realizar será la lectura de los datos de los ficheros CSV y JSON del histórico. Algunas consideraciones a tener en cuenta sobre estos datos son:
+
+- Ambos ficheros se encuentran alojados en el servidor con IP 10.201.59.248 en un sistema de almacenamiento distribuido compatible con S3.
+- El puerto de acceso a la API para obtener los datos utilizando la librería `boto3` es el `8333`.
+- Debes realizar una limpieza de los datos, con tareas tales como_
+  - Tratamiento de nulos
+  - Unificación de fechas heterogéneas
+  - Depuración de anomalías fisiológicas (frecuencias cardíacas imposibles o negativas)
+  - Normalización de textos
+  - Eliminación de duplicados
+- **Opcionalmente**, podrás realizar un proceso de anonimización antes de almacenar los datos en MongoDB. Este proceso incluirá, por lo menos:
+  - Ofuscación irreversible del SIP sustituyendo el `sip_paciente` por un hash truncado generado con salting criptográfico (`HMAC-SHA256`).
+  - Supresión de identificadores directos eliminando el campo `nombre` en los datos persistidos o sustituirlo por un identificador anonimizado (`PACIENTE-ANON-XXXX`).
+  - Agrupación por rangos transformado la `edad` exacta en grupos demográficos quinquenales o decenales (ej. `[60-69]`) para reducir el riesgo de reidentificación de historiales con patologías raras.
+- Los datos se almacenarán en la colección `episodios_urgencias` de MongoDB.
+- Una vez realizada la carga de datos deberás realizar las siguientes consultas sobre ellos:
+  1. Tiempo medio de estancia (en minutos) por cada categoría patológica de triaje.
+  2. Distribución porcentual de destinos al alta (domicilio vs. ingreso en planta) según grupos de edad.
+
+
+
+### C. Consumo de la API REST y motor de tiempo real (Redis)
+
+La segunda tarea que tienes que realizar en este reto es gestionar en tiempo real la llegada de nuevos pacientes a urgencias y asignarles un box priorizando en función de la urgencia.
+
+Algunas cosas que tienes que tener en cuenta son:
+
+- La API está publicada a través del endpoint `GET http://10.201.59.248:28000/api/v1/urgencias/novedades`
+- Tu script deberá consultar este endpoint cada 5 segundos y le devolverá las nuevas altas y bajas en este periodo. A continuación tienes un ejemplo de los datos que devuelve:
+
+  ```json
+  {
+    "timestamp_consulta": 1727192400.0,
+    "total_nuevos": 1,
+    "total_altas": 1,
+    "nuevos_ingresos": [
+      {
+        "id_episodio": "EP-2026-50001",
+        "datos_admision": {
+          "sip_paciente": "SIP-849201",
+          "nombre": "Ana García",
+          "edad": 62,
+          "motivo_consulta": "Dolor torácico opresivo",
+          "timestamp_llegada": 1727192395.0,
+          "fecha_hora_texto": "2026-09-24 17:39:55"
+        },
+        "datos_triaje": {
+          "nivel_manchester": 2,
+          "color": "naranja",
+          "categoria_patologia": "Cardiovascular",
+          "tiempo_max_espera_min": 10,
+          "constantes": { "temperatura_c": 36.8, "frecuencia_cardiaca": 98, "tension_arterial": "140/90" },
+          "antecedentes": ["hipertension", "diabetes"],
+          "alergias": ["penicilina"],
+          "modulo_cardiologia": { "ecg_realizado": true, "troponinas_ng_ml": 0.42 }
+        }
       }
-    }
-  ],
-  "pacientes_alta": [
-    {
-      "id_episodio": "EP-2026-49980",
-      "timestamp_alta": 1727192400.0,
-      "fecha_hora_alta": "2026-09-24 17:40:00",
-      "destino_alta": "domicilio"
-    }
-  ]
-}
+    ],
+    "pacientes_alta": [
+      {
+        "id_episodio": "EP-2026-49980",
+        "timestamp_alta": 1727192400.0,
+        "fecha_hora_alta": "2026-09-24 17:40:00",
+        "destino_alta": "domicilio"
+      }
+    ]
+  }
+  ```
 
-```
-
-#### Lógica Operacional en Redis
-
-* **Cola de Triage:** Uso de un *Sorted Set* (`urgencias:cola_espera`). El *score* numérico debe ser el **límite máximo de atención** calculado mediante el algoritmo *Earliest Deadline First*:
+- Para gestionar la cola de triaje tendréis que usar un *Sorted Set* (`urgencias:cola_espera`). El *score* numérico debe ser el **límite máximo de atención** calculado mediante el algoritmo *Earliest Deadline First*. 
 
 $$\text{score} = \text{timestamp\_llegada} + (\text{tiempo\_max\_espera\_min} \times 60)$$
 
-
-
-*(El paciente más urgente o con mayor retraso tendrá el score más bajo y será recuperado con `ZPOPMIN`).*
-* **Boxes de Atención:** Simular 5 boxes mediante *Hashes* (`box:1`, `box:2`... `box:5`) que registren qué paciente lo ocupa y a qué hora entró.
-* **Llegada de un paciente nuevo:** Se guarda temporalmente en Redis y entra en la cola `urgencias:cola_espera`. Si hay un box libre, es asignado de inmediato.
-* **Llegada de un alta médica:**
-1. Se localiza al paciente en su box de Redis y se libera dicho box.
-2. Se extrae al siguiente paciente más urgente de la cola y se sienta en el box liberado.
-3. **Cierre en MongoDB:** Se vuelca el documento clínico del paciente que acaba de salir en la colección `episodios_urgencias` con su fecha de alta y destino definitivos, borrándolo por completo de Redis.
-
-
-
-
-## 4. Requisito Opcional: Módulo de Anonimización de Datos (RGPD)
-
-> **Criterio 3.d:** *"Gestión de grandes volúmenes de datos de manera eficiente y segura, teniendo en cuenta la normativa existente"*.
-
-Los equipos que deseen optar a la máxima calificación técnica en el RA3 pueden implementar un módulo de pseudonimización y anonimización previa al volcado en MongoDB:
-
-1. **Ofuscación irreversible del SIP:** Sustituir el `sip_paciente` por un hash truncado generado con salting criptográfico (`HMAC-SHA256`).
-2. **Supresión de Identificadores Directos:** Eliminar el campo `nombre` en los datos persistidos o sustituirlo por un identificador anonimizado (`PACIENTE-ANON-XXXX`).
-3. **Agrupación por Rangos Etarios:** Transformar la `edad` exacta en grupos demográficos quinquenales o decenales (ej. `[60-69]`) para reducir el riesgo de reidentificación de historiales con patologías raras.
+- De esta forma podrás recuperar el paciente con el score más bajo mediante la función `ZPOPMIN`.
+- El proceso será el siguiente:
+  1. Simularéis 5 boxes mediante *Hashes* (`box:1`, `box:2`... `box:5`) que registrarán qué paciente lo ocupa y a qué hora entró.
+  2. Cuando llega una paciente nuevo se guarda temporalmente en Redis y entra en la cola `urgencias:cola_espera`, asignándole un score en base a la fórmula anterior
+  3. Si hay un alta médica:
+     1. Se localiza al paciente en su box y se libera de dicho box
+     2. Se escoge al paciente con score más bajo y se le pasa a dicho box
+     3. Se vuelca el documento clínico del paciente dado de alta en la colección `episodios_urgencias` de MongoDB con su fecha de alta y destino definitivo, borrándolo por completo de Redis
 
 
 
-## 5. Planificación y Cronograma de Trabajo (7 Semanas / 14 Horas)
 
-```mermaid
+## 4. Planificación y cronograma de trabajo (7 Semanas / 14 Horas)
+
+<div class="mermaid">
 timeline
     title Planificación Semanal - Reto Urgencias Hospitalarias
     Semana 1 : Kick-off reto y roles Scrumban : Despliegue de Docker (Mongo + Redis)
@@ -199,24 +199,25 @@ timeline
     Semana 5 : Ingesta Streaming : Polling contra API REST cada 5 segundos
     Semana 6 : Integración End-to-End : Anonimización RGPD (opcional) y pruebas de estrés
     Semana 7 : Evaluación : Demo en vivo (inyección profesor) : Prueba práctica individual
+</div>
 
-```
+Los hitos que hay que alcanzar en cada una de las 7 semanas que dedicaremos a este reto son:
 
 - **Semana 1 (2h):** Lanzamiento del reto. Configuración del tablero Kanban. Creación de `docker-compose.yml` y verificación de conectividad desde Python.
-- **Semana 2 (2h):** Construcción del script ETL en Pandas sobre el CSV y JSON históricos. Tratamiento guiado de nulos, atípicos y cruce de datos.
+- **Semana 2 (2h):** Construcción del script ETL en Pandas sobre el CSV y JSON históricos. Tratamiento de nulos, atípicos y cruce de datos.
 - **Semana 3 (2h):** Carga del histórico depurado en MongoDB con `pymongo`. Implementación de las 2 consultas de agregación analítica.
 - **Semana 4 (2h):** Algoritmia de colas con Redis. Implementación de funciones para encolar pacientes (*Earliest Deadline First*) y asignación a boxes.
 - **Semana 5 (2h):** Conexión con la API REST. Implementación del bucle de sondeo cada 5 segundos y procesamiento de las listas de altas e ingresos.
 - **Semana 6 (2h):** Integración completa (API $\rightarrow$ Redis $\rightarrow$ Box $\rightarrow$ Mongo). Pruebas de estrés e incorporación del módulo opcional de anonimización.
 - **Semana 7 (2h):** **Evaluación:**
-  - *Primera hora (50 min):* Demostraciones en vivo por equipos (inyección de emergencias en directo).
-  - *Segunda hora (50 min):* Prueba práctica individual en máquina.
+  - *Primera hora (50 min):* Demostraciones en vivo por equipos.
+  - *Segunda hora (50 min):* Prueba práctica individual en máquina o escrita.
 
 
 
 
 
-## 6. Estructura del Repositorio y Entregables
+## 5. Estructura del repositorio y entregables
 
 Cada equipo debe entregar un único repositorio Git organizado:
 
@@ -240,7 +241,7 @@ Cada equipo debe entregar un único repositorio Git organizado:
 
 
 
-## 7. Rúbrica de Evaluación y Definition of Done (DoD)
+## 7. Rúbrica de evaluación y Definition of Done (DoD)
 
 La calificación del reto combina el producto técnico del equipo y el desempeño individual:
 
@@ -251,3 +252,14 @@ La calificación del reto combina el producto técnico del equipo y el desempeñ
 | **Tiempo Real y Algoritmia (RA 1.c, 3.a)**                | Polling fluido sin saturar la red. Algoritmo *Earliest Deadline First* preciso. Asignación y vaciado de boxes automático al alta. | El polling funciona pero el cálculo de prioridad no gestiona adecuadamente los tiempos o falla al liberar boxes.    | La cola no prioriza según la escala Manchester o el worker se bloquea ante fallos de conexión.  |
 | **Seguridad y RGPD (RA 3.d) [Opcional]**                  | Implementación de anonimización reversible/irreversible (hashing con salt y agrupación etaria) justificada en memoria técnica.    | Hashing simple sin salt o eliminación básica de nombres sin considerar otros identificadores indirectos.            | No implementado (no penaliza si el resto es excelente, pero no opta al tramo superior de nota). |
 | **Prueba Práctica Individual en Máquina (45% nota ind.)** | Modificación en vivo del código o resolución de una consulta nueva en Mongo/Redis en tiempo tasado sin asistencia externa.        | Resuelve la mayor parte de la prueba con errores sintácticos menores.                                               | Incapaz de manipular o explicar el código presentado por el equipo.                             |
+
+
+
+
+
+
+
+<script type="module">
+  import mermaid from 'https://jsdelivr.net';
+  mermaid.initialize({ startOnLoad: true });
+</script>
