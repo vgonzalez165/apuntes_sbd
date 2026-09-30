@@ -152,7 +152,7 @@ if duplicados_id.any():
 
 ## 2.4. Coerción de tipos de datos y optimización de memoria
 
-Pandas utiliza tipos de NumPy bajo el capó, pero muchas conversiones requieren control estricto de excepciones para evitar que el proceso falle ante valores no estandarizados.
+Pandas utiliza tipos de NumPy, pero muchas conversiones requieren control estricto de excepciones para evitar que el proceso falle ante valores no estandarizados.
 
 ### Conversión numérica con coerción de excepciones
 
