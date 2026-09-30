@@ -258,8 +258,18 @@ La calificación del reto combina el producto técnico del equipo y el desempeñ
 
 
 
-
 <script type="module">
-  import mermaid from 'https://jsdelivr.net';
-  mermaid.initialize({ startOnLoad: true });
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  
+  // Convierte los bloques de código que genera Jekyll en contenedores que Mermaid entiende
+  document.querySelectorAll('pre code.language-mermaid, pre.language-mermaid').forEach((el) => {
+    const container = el.tagName === 'CODE' ? el.parentElement : el;
+    const div = document.createElement('div');
+    div.className = 'mermaid';
+    div.textContent = el.textContent;
+    container.replaceWith(div);
+  });
+
+  mermaid.initialize({ startOnLoad: false });
+  await mermaid.run();
 </script>
