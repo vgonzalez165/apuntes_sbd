@@ -6,8 +6,17 @@ Módulo:                     SISTEMAS DE BIG DATA
 Profesor:                   Víctor J. González
 Unidad de Trabajo:          UT02. PERSISTENCIA DOCUMENTAL, CACHÉ Y PROCESAMIENTO ETL
 Apartado:                   1.- Carga de datos con Pandas
-Resultados de aprendizaje:  ?
+Resultados de aprendizaje:  RA1, RA3
 ```
+
+# Archivos relacionados
+
+Si quieres ejecutar este Cuaderno de Jupyter en tu equipo puedes descargar los siguientes ficheros.
+
+- [Notebook de Jupyter](./notebook/Carga_de_datos_en_Pandas.ipynb)
+- [Dataset de salarios formato CSV](./notebook/salarios.csv)
+- [Dataset de salarios formato Excel](./notebook/salarios.xlsx)
+- [Notebook + datos en formato ZIP](././notebook.zip)
 
 # 1.- Carga de datos con Pandas
 
@@ -64,7 +73,7 @@ print(df_csv.dtypes)
     Skipping line 7: Expected 5 fields in line 7, saw 6
 
 
-### 1.2 Hojas de Cálculo (Excel)
+## 1.2 Hojas de Cálculo (Excel)
 
 A diferencia del texto plano, un fichero `.xlsx` es un contenedor comprimido (ZIP) compuesto por archivos XML, estilos, metadatos y varias hojas, lo que demanda librerías auxiliares como `openpyxl` (para `.xlsx`) o `xlrd` (para formatos antiguos `.xls`).
 
@@ -103,7 +112,7 @@ print(df_excel)
     7     NaN            NaN          NaN       NaN                  NaN
 
 
-### 1.3 Formato JSON y JSON Lines
+## 1.3 Formato JSON y JSON Lines
 
 JSON es el estándar dominante en APIs web y bases de datos documentales. Su estructura jerárquica y anidada requiere técnicas de aplanado (_flattening_) para representarse de forma tabular.
 - `pd.json_normalize()`: Aplana diccionarios anidados utilizando notación de puntos para las columnas compuestas.
@@ -157,7 +166,7 @@ with open('datos.json', 'r', encoding='utf-8') as archivo:
     raw_json = json.load(archivo)
 ``` 
 
-### 1.4 Formato XML
+## 1.4 Formato XML
 
 Formato jerárquico basado en etiquetas que requiere de la librería `lxml` (que debemos instalar si no la tenemos instalada). Se procesa mediante `pd.read_xml()`, navegando la estructura con expresiones **XPath**:
 
@@ -212,7 +221,7 @@ print(df_xml)
     1  A002     Ratón    25.0
 
 
-### 1.5 Ingesta desde APIs REST
+## 1.5 Ingesta desde APIs REST
 
 Una API REST utiliza HTTP para interactuar con recursos identificados mediante URLs.
 - **Métodos principales:** `GET` (lectura), `POST` (creación), `PUT` (actualización), `DELETE` (eliminación).
@@ -223,7 +232,7 @@ Una API REST utiliza HTTP para interactuar con recursos identificados mediante U
     - **Bearer Token:** token criptográfico (habitual en flujos OAuth / JWT) sin estado enviado en la cabecera `Authorization: Bearer <token>`.
     - **Basic Auth:** envío codificado de usuario y contraseña.
 
-#### Ejemplo 1: Consulta sin autenticación ([Star Wars API](https://swapi.dev))
+### Ejemplo 1: Consulta sin autenticación ([Star Wars API](https://swapi.dev))
 
 
 ```python
@@ -254,7 +263,7 @@ print(df_planets[columnas_interes].head())
     4   Dagobah     8900                murky                      swamp, jungles
 
 
-#### Ejemlo 2: Consulta con API Key en la URL ([Open Weather API](https://api.openweathermap.org/))
+### Ejemlo 2: Consulta con API Key en la URL ([Open Weather API](https://api.openweathermap.org/))
 
 
 ```python
@@ -302,7 +311,7 @@ except Exception as e:
     print(f"Error inesperado: {e}")
 ```
 
-#### Ejemplo 3: Consulta con Bearer Token ([The IMDB (Internet Movie Database)](https://api.themoviedb.org))
+### Ejemplo 3: Consulta con Bearer Token ([The IMDB (Internet Movie Database)](https://api.themoviedb.org))
 
 
 ```python
@@ -350,7 +359,7 @@ except Exception as e:
     print(f"Error inesperado: {e}")
 ```
 
-### 1.6 Extracción Web (Web Scraping y `read_html`)
+## 1.6 Extracción Web (Web Scraping y `read_html`)
 
 - **Técnica:** Obtención programática de información contenida en sitios web.
 - **Retos habituales:** Carga de contenido dinámico mediante JavaScript, volatilidad del DOM, bloqueos de IP, resolución de CAPTCHAs y necesidad de respetar `robots.txt` y cabeceras `User-Agent`.
@@ -424,6 +433,103 @@ except Exception as e:
 
 
 
+## 1.7 Almacenamiento de objetos compatible con S3 (AWS Academy y SeaweedFS)
+
+En arquitecturas Big Data y *Data Lakes*, el almacenamiento masivo desacoplado del cómputo no utiliza sistemas de ficheros tradicionales (POSIX), sino **almacenes de objetos**. La API de **Amazon S3** se ha convertido en el estándar *de facto* de la industria, adoptado tanto por proveedores cloud como por soluciones locales de código abierto. 
+
+Algunos conceptos clave que tenemos que conocer cuando trabajamos con S3:
+
+- **Bucket y Clave (Key):** un bucket es un contenedor raíz plano y una clave (`datos/raw/salarios.csv`) es el identificador único del objeto. Las carpetas no existen físicamente en S3; son prefijos simulados por la barra (`/`).
+- **Librería `s3fs`:** Pandas delega las conexiones con protocolo `s3://` en la librería `s3fs`. Debe estar instalada en el entorno (`pip install s3fs`).
+- **AWS S3 (AWS Academy):** En entornos educativos como AWS Academy Learner Lab, las cuentas utilizan credenciales temporales generadas mediante AWS STS. Por ello, además de `key` y `secret`, es obligatorio suministrar el parámetro `token` (`aws_session_token`), el cual caduca periódicamente.
+
+
+- **SeaweedFS (On-Premise / Laboratorio local):** Es un sistema de almacenamiento distribuido de alto rendimiento que incluye una capa de compatibilidad S3 (`weed s3`). Para conectarse a él es imprescindible redirigir las peticiones mediante `endpoint_url` y habilitar el direccionamiento por ruta (`addressing_style: 'path'`) para evitar que el cliente intente resolver subdominios DNS locales que no existen.
+
 ```python
+import pandas as pd
+
+# ==============================================================================
+# CONFIGURACIÓN DE CONEXIÓN VÍA storage_options
+# ==============================================================================
+
+# ESCENARIO A: AWS Academy Learner Lab (Cloud AWS)
+# En este caso necesitaremos obtener las credenciales desde la consola de AWS Academy. Recuerda que estas se encuentran en AWS Details
+storage_options_aws = {
+    "key": "ASIAXXXXXXXXXXXXXXXX",               # aws_access_key_id
+    "secret": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY", # aws_secret_access_key
+    "token": "IQoJb3JpZ2luX2VjE...",             # aws_session_token (Obligatorio en AWS Academy. Caduca cada vez que cambiamos de laboratorio)
+    "client_kwargs": {
+        "region_name": "us-east-1"               # Región por defecto en AWS Academy
+    }
+}
+
+# ESCENARIO B: Cluster local con SeaweedFS
+# El servicio S3 de SeaweedFS corre habitualmente en el puerto 8333
+storage_options_seaweed = {
+    "key": "alumno",                              # Configurado en s3.json de SeaweedFS
+    "secret": "paso",
+    "client_kwargs": {
+        # IP o DNS del nodo SeaweedFS y puerto donde corre el servicio S3
+        "endpoint_url": "http://10.201.59.248:8333" 
+    },
+    "config_kwargs": {
+        "s3": {
+            # Obligatorio en despliegues locales: fuerza peticiones http://ip:puerto/bucket/objeto
+            # en lugar de http://bucket.ip:puerto/objeto
+            "addressing_style": "path"
+        }
+    }
+}
+
+# ==============================================================================
+# LECTURA DEL FICHERO DESDE PANDAS
+# ==============================================================================
+
+# Seleccionamos las opciones deseadas (cambiar entre seaweedfs y aws según la práctica)
+opciones_activas = storage_options_seaweed
+
+# La URI mantiene el formato estándar s3://<bucket>/<clave>
+s3_uri = "s3://empresa-datalake-landing/rrhh/salarios.csv"
+
+# Lectura directa: Pandas descarga el stream en memoria y procesa los delimitadores
+df_s3 = pd.read_csv(
+    s3_uri,
+    storage_options=opciones_activas,            # Inyecta credenciales y endpoints a s3fs
+    sep=';',                                     # Mantenemos las opciones de limpieza vistas en 1.1
+    header=0,
+    index_col='id',
+    na_values=['ERROR', 'SIN_DATO', '?', '-'],
+    on_bad_lines='warn',
+    engine='python',
+    parse_dates=['fecha_alta']
+)
+
+print("DataFrame leído correctamente desde almacenamiento compatible con S3:")
+print(df_s3)
+print("\nTipos inferidos:")
+print(df_s3.dtypes)
+
+```
+
+```
+DataFrame leído correctamente desde almacenamiento compatible con S3:
+               nombre departamento   salario fecha_alta
+id                                                     
+1001       Ana García    Marketing   45000.0 2021-03-15
+1002      Carlos Ruiz       Ventas   38500.0 2022-07-01
+1003    Elena Vázquez           IT   52000.0 2020-11-20
+1004     Jorge Méndez         RRHH       NaN 2023-01-10
+1005     Lucía Torres     Finanzas   47000.0 2019-05-25
+1007        Marta Gil       Ventas       NaN 2024-02-01
+
+Tipos inferidos:
+nombre                   object
+departamento             object
+salario                 float64
+fecha_alta       datetime64[ns]
+dtype: object
+
+Skipping line 7: Expected 5 fields in line 7, saw 6
 
 ```

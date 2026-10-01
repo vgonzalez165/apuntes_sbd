@@ -1,0 +1,8 @@
+id;nombre;departamento;salario;fecha_alta
+1001;Ana García;Marketing;45000;2021-03-15
+1002;Carlos Ruiz;Ventas;38500;2022-07-01
+1003;Elena Vázquez;IT;52000;2020-11-20
+1004;Jorge Méndez;RRHH;ERROR;2023-01-10
+1005;Lucía Torres;Finanzas;47000;2019-05-25
+1006;Fila Invalida;Extra;Campo;Inesperado;SobranColumnas
+1007;Marta Gil;Ventas;SIN_DATO;2024-02-01

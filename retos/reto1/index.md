@@ -14,18 +14,18 @@ Criterios de evaluación:    RA1 c, RA1 d, RA1 f, RA3 a, RA3 b y RA3 d
 
 ## Enunciado
 
-Puedes acceder al enunciado del reto [aquí](./enunciado_alumno/index.md)
+[Enunciado del reto](./enunciado_alumno/index.md)
 
 ## Evaluación
 
-
+[Criterios de evaluación del reto](./evaluación/index.md)
 
 ## Contenidos asociados a este reto
 
 |   | Contenidos                                                                            | Notebook de Jupyter |
 | - | ------------------------------------------------------------------------------------- | ------------------- |
 | 1 | [Carga de datos con Pandas](./apuntes/01_carga_de_datos/Carga_de_datos_en_Pandas.md)  | [ZIP](./apuntes/01_carga_de_datos/01%20-%20Carga%20de%20datos.zip)  |
-| 2 | [Limpieza de datos con Pandas]()                                                      | |
+| 2 | [Limpieza de datos con Pandas](./apuntes/)                                                      | |
 | 3 | [Anonimización de datos]()                                                            | |
 | 4 | [Bases de datos documentales (MongoDB)]()                                             | |
 | 5 | [Bases de datos clave-valor (Redis)]()                                                | |

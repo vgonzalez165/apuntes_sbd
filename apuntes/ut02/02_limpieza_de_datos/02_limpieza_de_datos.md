@@ -12,9 +12,6 @@ Resultados de aprendizaje:  ?
 # 2.- Limpieza de datos con Pandas
 
 
-TODO: HAY QUE REVISAR TODO ESTO BIEN
-
-
 ## 2.1. Datos de pruebas: creación del dataset "sucio"
 
 Para comprender el alcance de los problemas habituales, utilizaremos un conjunto de datos que concentra las patologías más frecuentes de fuentes heterogéneas (APIs, logs desestructurados, volcados SQL sin restricciones):
@@ -237,36 +234,6 @@ El tratamiento de valores faltantes depende de la naturaleza probabilística de 
 
 ![Qué hacer con los NaN?](nan.png)
 
-```
-                                 ¿Qué hacer con los NaN?
-                                            │
-                  ┌─────────────────────────┴─────────────────────────┐
-                  ▼                                                   ▼
-         ¿Es una clave primaria /                    ¿Es una característica (feature)
-        identificador indispensable?                        predictiva para el modelo?
-                  │                                                   │
-                  ▼                                                   ▼
-       Eliminar fila (.dropna)                         ¿Qué porcentaje es nulo?
-                                                 ┌────────────────────┴────────────────────┐
-                                                 ▼                                         ▼
-                                              > 40-50%                                  < 40%
-                                                 │                                         │
-                                                 ▼                                         ▼
-                                       Evaluar descartar               ¿De qué tipo de variable se trata?
-                                        columna completa                 ┌─────────────────┴─────────────────┐
-                                                                         ▼                                   ▼
-                                                                     Numérica                            Categórica
-                                                                         │                                   │
-                                                          ┌──────────────┴──────────────┐                    ▼
-                                                          ▼                             ▼             Imputar con Moda
-                                                     ¿Simétrica?                   ¿Asimétrica/      o nueva categoría
-                                                          │                         Outliers?           ('Desconocido')
-                                                    ┌─────┴─────┐                       │
-                                                    ▼           ▼                       ▼
-                                                  Media    Interpolación             Mediana
-                                                          (Series temporales)   o Imputación por Grupos
-
-```
 
 ### Implementación en código
 

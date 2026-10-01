@@ -104,8 +104,7 @@ El proyecto debe cumplir con las siguientes especificaciones:
 
 El primer proceso a realizar será la lectura de los datos de los ficheros CSV y JSON del histórico. Algunas consideraciones a tener en cuenta sobre estos datos son:
 
-- Ambos ficheros se encuentran alojados en el servidor con IP 10.201.59.248 en un sistema de almacenamiento distribuido compatible con S3.
-- El puerto de acceso a la API para obtener los datos utilizando la librería `boto3` es el `8333`.
+- Ambos ficheros se encuentran disponibles en una página web alojada en el servidor con IP `10.201.59.248:8088`.
 - Debes realizar una limpieza de los datos, con tareas tales como_
   - Tratamiento de nulos
   - Unificación de fechas heterogéneas
@@ -192,7 +191,7 @@ $$\text{score} = \text{timestamp\_llegada} + (\text{tiempo\_max\_espera\_min} \t
 <div class="mermaid">
 timeline
     title Planificación Semanal - Reto Urgencias Hospitalarias
-    Semana 1 : Kick-off reto y roles Scrumban : Despliegue de Docker (Mongo + Redis)
+    Semana 1 : Puesta en marcha del reto y roles Scrumban : Despliegue de Docker (Mongo + Redis)
     Semana 2 : Pipeline ETL en Pandas : Saneamiento de tipos, nulos y cruce de fuentes
     Semana 3 : Carga en MongoDB : Agregaciones analíticas (estancias y destinos)
     Semana 4 : Motor en memoria con Redis : Algoritmo Earliest Deadline First y Boxes

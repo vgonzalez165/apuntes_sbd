@@ -2,31 +2,31 @@
 
 # Relación de contenidos y prácticas del módulo
  
-|          | Título                                                                                                        | Fecha límite   | RAs   |
-| -------- | ------------------------------------------------------------------------------------------------------------- | -------------- | ----- |
-| **UT01** | **INTRODUCCIÓN AL BIG DATA**                                                                                  |                
-|          | 1.1 [Las 5 V's del Big Data](./apuntes/ut01/01-introduccion-5vs.md)                                           |                |  |
-|          | 1.2 [Conceptos de almacenamiento distribuido](./apuntes/ut01/02-conceptos-almacenamiento.md)                  |                |  |
-|          | 1.3 [Conceptos de procesamiento distribuido](./apuntes/ut01/03-conceptos-procesamiento.md)                    |                |  |
-|          | 1.4 [Ejemplos reales de uso del Big Data](./apuntes/ut01/04-ejemplos-reales-uso.md)                           |                |  |
-|          | 1.5 [Metodologías de minería de datos: SEMMA y CRISP-DM](./apuntes/ut01/05-semma-crisp-dm.md)                 |                |  |
-|          | 1.6 [Trabajo en equipo con metodologías Ágiles]()               |    |  |
-|          |                                                                                                               |                |       |
-| **UT02** | **PERSISTENCIA DOCUMENTAL, CACHÉ Y PROCESAMIENTO ETL**                                                        |                | `RA1` `RA3` |
-|          | 2.1 [Carga de datos con Pandas](./apuntes/ut02/01_carga_de_datos/01_carga_datos.md)                            |                |  |
-|          | 2.2 [Limpieza de datos]()  | | |
-|          | 2.3 [Anonimización de datos](./apuntes/ut02/03_anonimizacion/03_anonimizacion.md)                                                                                                         |                |  |
-|          | 2.4 [Bases de datos documentales (MongoDB)]()                                                                                                         |                |  |
-|          | 2.5 [Bases de datos clave-valor (Redis)]()                                                                                                         |                |  |
-|          |                                                                                                               |                |       |
-|          |`RETO1` [Sistema de triaje y trazabilidad de urgencias hospitalarias](./retos/reto1/index.md)                  | **--/--/----** |       |
-|          |                                                                                                               |                |       |
-| **UT3**   |**GRAFOS, ALGORITMIA Y REDES COMPLEJAS**                                                            |                | `RA1` `RA3` `RA4` |
-|           | [Neo4j]()                                                                                                         |                |  |
-|            |                                                                                                             |                |       |
-| **UT04**   |**SERIES TEMPORALES, TELEMETRÍA Y DASHBOARDS OPERATIVOS**                                                                |                | `RA2` `RA4`       |
-|            |                                                                                                             |                |       |
-| **UT05**   |**ALMACENAMIENTO MASIVO COLUMNAR, RESILIENCIA Y BI**                                                                       |                | `RA1` `RA3` `RA4` |
+|          | Título                                                                                        | Fecha límite   | RAs               |
+| -------- | --------------------------------------------------------------------------------------------- | -------------- | ----------------- |
+| **UT01** | **INTRODUCCIÓN AL BIG DATA**                                                                  |                |                   |
+|          | 1.1 [Las 5 V's del Big Data](./apuntes/ut01/01-introduccion-5vs.md)                           |                |                   |
+|          | 1.2 [Conceptos de almacenamiento distribuido](./apuntes/ut01/02-conceptos-almacenamiento.md)  |                |                   |
+|          | 1.3 [Conceptos de procesamiento distribuido](./apuntes/ut01/03-conceptos-procesamiento.md)    |                |                   |
+|          | 1.4 [Ejemplos reales de uso del Big Data](./apuntes/ut01/04-ejemplos-reales-uso.md)           |                |                   |
+|          | 1.5 [Metodologías de minería de datos: SEMMA y CRISP-DM](./apuntes/ut01/05-semma-crisp-dm.md) |                |                   |
+|          | 1.6 [Trabajo en equipo con metodologías Ágiles]()                                             |                |                   |
+|          |                                                                                               |                |                   |
+| **UT02** | **PERSISTENCIA DOCUMENTAL, CACHÉ Y PROCESAMIENTO ETL**                                        |                | `RA1` `RA3`       |
+|          | 2.1 [Carga de datos con Pandas](./apuntes/ut02/01_carga_de_datos/01_carga_datos.md)           |                |                   |
+|          | 2.2 [Limpieza de datos]()                                                                     |                |                   |
+|          | 2.3 [Anonimización de datos](./apuntes/ut02/03_anonimizacion/03_anonimizacion.md)             |                |                   |
+|          | 2.4 [Bases de datos documentales (MongoDB)]()                                                 |                |                   |
+|          | 2.5 [Bases de datos clave-valor (Redis)]()                                                    |                |                   |
+|          |                                                                                               |                |                   |
+|          | `RETO1` [Sistema de triaje y trazabilidad de urgencias hospitalarias](./retos/reto1/index.md) | **--/--/----** |                   |
+|          |                                                                                               |                |                   |
+| **UT3**  | **GRAFOS, ALGORITMIA Y REDES COMPLEJAS**                                                      |                | `RA1` `RA3` `RA4` |
+|          | [Neo4j]()                                                                                     |                |                   |
+|          |                                                                                               |                |                   |
+| **UT04** | **SERIES TEMPORALES, TELEMETRÍA Y DASHBOARDS OPERATIVOS**                                     |                | `RA2` `RA4`       |
+|          |                                                                                               |                |                   |
+| **UT05** | **ALMACENAMIENTO MASIVO COLUMNAR, RESILIENCIA Y BI**                                          |                | `RA1` `RA3` `RA4` |
 
 
 ## Resultados de aprendizaje del módulo
