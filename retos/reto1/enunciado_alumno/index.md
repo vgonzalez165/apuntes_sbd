@@ -100,7 +100,7 @@ El proyecto debe cumplir con las siguientes especificaciones:
 - El entorno debe levantarse de forma totalmente reproducible mediante el comando estándar: `docker compose up -d`.
 
 
-### B. Migración del histórico (ETL con Pandas $\rightarrow$ MongoDB)
+### B. Migración del histórico (ETL con Pandas ➜ MongoDB)
 
 El primer proceso a realizar será la lectura de los datos de los ficheros CSV y JSON del histórico. Algunas consideraciones a tener en cuenta sobre estos datos son:
 
@@ -207,7 +207,7 @@ Los hitos que hay que alcanzar en cada una de las 7 semanas que dedicaremos a es
 - **Semana 3 (2h):** Carga del histórico depurado en MongoDB con `pymongo`. Implementación de las 2 consultas de agregación analítica.
 - **Semana 4 (2h):** Algoritmia de colas con Redis. Implementación de funciones para encolar pacientes (*Earliest Deadline First*) y asignación a boxes.
 - **Semana 5 (2h):** Conexión con la API REST. Implementación del bucle de sondeo cada 5 segundos y procesamiento de las listas de altas e ingresos.
-- **Semana 6 (2h):** Integración completa (API $\rightarrow$ Redis $\rightarrow$ Box $\rightarrow$ Mongo). Pruebas de estrés e incorporación del módulo opcional de anonimización.
+- **Semana 6 (2h):** Integración completa (API ➜ Redis ➜ Box ➜ Mongo). Pruebas de estrés e incorporación del módulo opcional de anonimización.
 - **Semana 7 (2h):** **Evaluación:**
   - *Primera hora (50 min):* Demostraciones en vivo por equipos.
   - *Segunda hora (50 min):* Prueba práctica individual en máquina o escrita.
