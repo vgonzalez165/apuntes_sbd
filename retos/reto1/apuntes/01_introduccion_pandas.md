@@ -774,7 +774,3 @@ Para modificar datos sin riesgo, hay que fusionar la condición de filas y la co
 df.loc[df['edad'] > 30, 'compras'] = 0.0
 ```
 
-
-```python
-
-```
