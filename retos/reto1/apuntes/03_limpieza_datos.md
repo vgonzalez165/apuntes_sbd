@@ -1,6 +1,19 @@
-# 1. Limpieza de datos con Pandas
+```
+------------- ESPECIALIZACIÓN EN INTELIGENCIA ARTIFICIAL Y BIG DATA -------------
+---------------------------------------------------------------------------------
 
-## 2.1. Datos de pruebas: creación del dataset "sucio"
+Módulo:                     SISTEMAS DE BIG DATA
+Profesor:                   Víctor J. González
+Unidad de Trabajo:          UT02. PERSISTENCIA DOCUMENTAL, CACHÉ Y PROCESAMIENTO ETL
+Reto:                       1. Sistema de triaje y trazabilidad de urgencias hospitalarias
+Apartado:                   3. Limpieza de datos con Pandas
+Resultados de aprendizaje:  `RA1`, `RA3`
+```
+
+
+# 3. Limpieza de datos con Pandas
+
+## 3.1. Datos de pruebas: creación del dataset "sucio"
 
 Para comprender el alcance de los problemas habituales, utilizaremos un conjunto de datos que concentra las patologías más frecuentes de fuentes heterogéneas (APIs, logs desestructurados, volcados SQL sin restricciones):
 
@@ -219,7 +232,7 @@ df
 
 
 
-## 2.2. Auditoría de los datos
+## 3.2. Auditoría de los datos
 
 Antes de modificar un solo registro, es necesario realizar un análisis cuantitativo del estado del DataFrame. En proyectos con millones de filas no es posible examinar los datos visualmente, por lo que necesitamos analizar cada una de las columnas usando Python.
 
@@ -301,7 +314,7 @@ Algunas cosas en las que nos tenemos que fijar aquí:
   - La media, mediana y percentiles muestra información muy relevante sobre cómo están distribuidos los datos, aunque ya veremos más adelante con más detalle su significado.
 - La salida de nulos nos da una idea de cuántos nulos hay por cada campo.
 
-## 2.3. Normalización léxica y limpieza vectorizada de cadenas
+## 3.3. Normalización léxica y limpieza vectorizada de cadenas
 
 Los datos ingeridos desde sistemas heterogéneos (formularios web, bases de datos transaccionales, ficheros CSV o volcados JSON de APIs externas) presentan habitualmente anomalías de texto: espacios no imprimibles, caracteres invisibles y cadenas centinela que enmascaran la ausencia real de datos.
 
@@ -370,7 +383,7 @@ print(f"Valores canónicos únicos:\n{df['categoria'].cat.categories.tolist()}")
     ['basic', 'no_registrado', 'premium', 'standard']
 
 
-## 2.3. Integridad de claves y gestión de duplicados
+## 3.3. Integridad de claves y gestión de duplicados
 
 La duplicidad de registros falsea la cardinalidad de los datos e invalida las métricas de evaluación en modelos predictivos. Si un registro idéntico aparece en el conjunto de entrenamiento (*train*) y en el de prueba (*test*), se produce una **fuga de datos**, reportando un rendimiento artificialmente optimista.
 
@@ -410,7 +423,7 @@ if duplicados_id.any():
     5         105  Eva Sanz   29  2023-05-10           31000.0     basic        1.0
 
 
-## 2.4. Integridad de claves y gestión de duplicados
+## 3.4. Integridad de claves y gestión de duplicados
 
 La persistencia de duplicados falsea la cardinalidad de las entidades del modelo dimensional, distorsiona los cálculos agregados (sumas de ventas, métricas medias) e invalida los modelos predictivos. Si un mismo registro aparece simultáneamente en los particionados de entrenamiento (*train*) y de validación (*test*), se produce una **fuga de datos** (*data leakage*): el modelo memoriza el patrón en lugar de generalizar, arrojando métricas de rendimiento artificialmente optimistas que colapsan al desplegar en producción.
 
@@ -622,7 +635,7 @@ df
 
 
 
-## 2.5. Coerción de tipos de datos y estandarización temporal
+## 3.5. Coerción de tipos de datos y estandarización temporal
 
 Tras normalizar textos y resolver duplicados, el DataFrame aún conserva columnas en tipos genéricos (`object`) debido a la heterogeneidad de los datos originales. Forzar el tipado correcto es indispensable para habilitar operaciones aritméticas, filtros cronológicos y reducir el consumo de memoria.
 
@@ -796,7 +809,7 @@ df
 
 
 
-## 2.6. Reglas de validación de dominio y tratamiento de valores atípicos (*Outliers*)
+## 3.6. Reglas de validación de dominio y tratamiento de valores atípicos (*Outliers*)
 
 Antes de imputar valores ausentes en el siguiente apartado, es imprescindible identificar y aislar las anomalías numéricas. Si calculásemos la media o la mediana para rellenar los `NaN` conservando valores absurdos como una edad de $-5$ o $150$ años, **estaríamos contaminando los estadísticos de imputación**.
 
@@ -918,7 +931,7 @@ Una vez aisladas las anomalías biológicas en `edad` y neutralizada la varianza
 
 
 
-## 2.7. Tratamiento e imputación de valores ausentes
+## 3.7. Tratamiento e imputación de valores ausentes
 
 Habiendo forzado los tipos correctos (apartado 2.5) y neutralizado los errores de dominio como `np.nan` (apartado 2.6), el DataFrame concentra todos los valores ausentes bajo un estándar formal unificado: `np.nan` para flotantes, `<NA>` para enteros anulables y `NaT` para fechas.
 
@@ -1203,7 +1216,7 @@ df
 
 
 
-## 2.7. Detección y tratamiento de valores atípicos (*Outliers*)
+## 3.8. Detección y tratamiento de valores atípicos (*Outliers*)
 
 Un valor atípico puede responder a un error de captura (edad = -5 o 150) o a una variabilidad extrema real (ingresos = 850.000 €). No todos los valores extremos deben eliminarse: descartar anomalías legítimas empobrece la capacidad del modelo para generalizar o para tareas de detección de fraude.
 
@@ -1387,7 +1400,7 @@ df
 
 
 
-## 2.8. Arquitectura funcional de producción: *Method Chaining* y `.pipe()`
+## 3.9. Arquitectura funcional de producción: *Method Chaining* y `.pipe()`
 
 En la industria del software y la ingeniería de datos, el código disperso en celdas de Jupyter Notebook con mutaciones de estado sobre la misma variable (`df['x'] = ...`) es fuente recurrente de fallos silenciosos y dificulta las pruebas unitarias.
 

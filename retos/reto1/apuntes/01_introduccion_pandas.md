@@ -1,8 +1,20 @@
+```
+------------- ESPECIALIZACIÓN EN INTELIGENCIA ARTIFICIAL Y BIG DATA -------------
+---------------------------------------------------------------------------------
+
+Módulo:                     SISTEMAS DE BIG DATA
+Profesor:                   Víctor J. González
+Unidad de Trabajo:          UT02. PERSISTENCIA DOCUMENTAL, CACHÉ Y PROCESAMIENTO ETL
+Reto:                       1. Sistema de triaje y trazabilidad de urgencias hospitalarias
+Apartado:                   1. Introducción a Python Pandas
+Resultados de aprendizaje:  `RA1`, `RA3`
+```
+
 # 1.- Introducción a Pandas
 
 Pandas no es una simple biblioteca de manipulación de tablas; es una capa de abstracción construida sobre **NumPy** diseñada para el procesamiento vectorizado y el análisis exploratorio de datos. Para trabajar de forma eficiente en entornos de Inteligencia Artificial y Big Data, el primer paso es abandonar la programación procedimental basada en bucles (`for`, `while`) y adoptar el **paradigma vectorizado y declarativo**.
 
-## 1. El modelo mental: de la iteración a la vectorización
+## 1.1. El modelo mental: de la iteración a la vectorización
 
 En Python estándar, transformar una lista implica recorrer elemento a elemento. En Pandas, las operaciones se ejecutan sobre matrices contiguas en memoria escritas en C. Esto quiere decir que, cuando yo quiero realizar una función sobre todos los elementos de una lista, en Python tradicional tengo que iterar sobre cada elemento de la lista y aplicar sobre dicho elemento la operación deseada. En cambio, en Pandas realizo la operación directamente sobre la lista (en realidad, la estructura de datos de Pandas que equivale a una lista es la serie) y ya se encarga Pandas internamente de aplicar la operación sobre cada elemento de una forma mucho más rápida y eficiente.
 
@@ -43,7 +55,7 @@ En concreto, el comando `%timeit` sirve para medir el tiempo que tarda en ejecut
 
 Como podemos ver en la salida del comando anterior, el cálculo en Python tarda unos 32 milisegundos, mientras que la misma operación en Pandas se puede realizar en apenas 800 microsegundos, apenas un 2.5% del tiempo que llevó en Python
 
-## 2. Las dos estructuras de datos fundamentales de Pandas
+## 1.2. Las dos estructuras de datos fundamentales de Pandas
 
 En Pandas se trabaja con dos tipos de estructuras de datos:
 
@@ -275,11 +287,11 @@ df.describe()
 
 
 
-## 3. Acceso, selección y el problema de las copias
+## 1.3. Acceso, selección y el problema de las copias
 
 El acceso a datos en Pandas suele ser la primera fuente de errores silenciosos y degradación de rendimiento. Comprender los mecanismos internos de indexación y cómo interactúan con la memoria evita comportamientos no deterministas en producción.
 
-## 3.1. Indexación estándar (`[]`) frente a indexadores explícitos
+## 1.3.1. Indexación estándar (`[]`) frente a indexadores explícitos
 
 En Python puro, los corchetes `[]` operan siempre sobre la misma dimensión. En un DataFrame, que es una estructura bidimensional, los corchetes pueden ser en ocasiones ambiguos o llevar a errores. Observa en los siguientes ejemplos cómo cambia el resultado según la forma de ponerlos.
 
@@ -586,7 +598,7 @@ df.iloc[-1, :]
 
 
 
-### 3.2. Acceso a escalares con `.at` y `.iat`
+### 1.3.2. Acceso a escalares con `.at` y `.iat`
 
 Cuando en un pipeline necesitas extraer o mutar **un único valor escalar**, `.loc` e `.iloc` introducen una sobrecarga innecesaria porque comprueban si el argumento es un slice, una lista o una máscara booleana. En esos casos es más útil utilizar `.at` (etiqueta) y `.iat` (posición), que es entre 5 y 10 veces más rápido para lecturas individuales.
 
@@ -616,7 +628,7 @@ df.iat[0, 0]
 
 
 
-## 3.3. Filtrado booleano y máscaras lógicas
+## 1.3.3. Filtrado booleano y máscaras lógicas
 
 El filtrado en Pandas se basa en construir una serie de booleanos que actúa como **máscara** sobre el eje de las filas.
 

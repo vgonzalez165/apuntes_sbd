@@ -1,3 +1,16 @@
+```
+------------- ESPECIALIZACIÓN EN INTELIGENCIA ARTIFICIAL Y BIG DATA -------------
+---------------------------------------------------------------------------------
+
+Módulo:                     SISTEMAS DE BIG DATA
+Profesor:                   Víctor J. González
+Unidad de Trabajo:          UT02. PERSISTENCIA DOCUMENTAL, CACHÉ Y PROCESAMIENTO ETL
+Reto:                       1. Sistema de triaje y trazabilidad de urgencias hospitalarias
+Apartado:                   2. Carga de datos con Pandas
+Resultados de aprendizaje:  `RA1`, `RA3`
+```
+
+
 # 1.- Carga de datos con Python Pandas
 
 ## 2.1.- Archivos delimitados (CSV/TSV)
@@ -64,7 +77,7 @@ print(df_csv.dtypes)
       df_csv = pd.read_csv(
 
 
-### 2.2 Hojas de Cálculo (Excel)
+## 2.2 Hojas de Cálculo (Excel)
 
 A diferencia del texto plano, un fichero `.xlsx` es un contenedor comprimido (ZIP) compuesto por archivos XML, estilos, metadatos y varias hojas, lo que demanda librerías auxiliares como `openpyxl` (para `.xlsx`) o `xlrd` (para formatos antiguos `.xls`).
 
@@ -88,7 +101,7 @@ dict_hojas = pd.read_excel('datos_anuales.xlsx', sheet_name=None)
 print("Hojas disponibles:", list(dict_hojas.keys()))
 ```
 
-### 2.3 Formato JSON y JSON Lines
+## 2.3 Formato JSON y JSON Lines
 
 JSON es el estándar dominante en APIs web y bases de datos documentales. Su estructura jerárquica y anidada requiere técnicas de aplanado (_flattening_) para representarse de forma tabular.
 - `pd.json_normalize()`: Aplana diccionarios anidados utilizando notación de puntos para las columnas compuestas.
@@ -136,7 +149,7 @@ print(df_alumnos)
     2  Pedro     5  ASIR  Segundo
 
 
-### 2.4 Formato XML
+## 2.4 Formato XML
 
 Formato jerárquico basado en etiquetas que requiere de la librería `lxml`. Se procesa mediante `pd.read_xml()`, navegando la estructura con expresiones **XPath**:
 
@@ -183,7 +196,7 @@ print(df_xml)
     1  A002     Ratón    25.0
 
 
-### 2.5 Ingesta desde APIs REST
+## 2.5 Ingesta desde APIs REST
 
 Una API REST utiliza HTTP para interactuar con recursos identificados mediante URLs.
 - **Métodos principales:** `GET` (lectura), `POST` (creación), `PUT` (actualización), `DELETE` (eliminación).
@@ -272,7 +285,7 @@ print(df_api)
 # Pendiente de hacer
 ```
 
-## 1.7 Almacenamiento de objetos compatible con S3 (AWS Academy y SeaweedFS)
+## 2.6 Almacenamiento de objetos compatible con S3 (AWS Academy y SeaweedFS)
 
 En arquitecturas Big Data y *Data Lakes*, el almacenamiento masivo desacoplado del cómputo no utiliza sistemas de ficheros tradicionales (POSIX), sino **almacenes de objetos**. La API de **Amazon S3** se ha convertido en el estándar *de facto* de la industria, adoptado tanto por proveedores cloud como por soluciones locales de código abierto. 
 
