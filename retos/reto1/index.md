@@ -20,6 +20,22 @@ Criterios de evaluación:    RA1 c, RA1 d, RA1 f, RA3 a, RA3 b y RA3 d
 
 [Criterios de evaluación del reto](./evaluación/index.md)
 
+## Calendario
+
+Aunque en el enunciado se expone en más detalle, en la siguiente tablas tienes un resumen de la planificación que debes seguir para abordar este reto.
+
+| **Semana** | **Etapa**    | **Fecha**    | **Tareas de esa semana**                                                                                              |
+| ---------- | ------------ | ------------ | --------------------------------------------------------------------------------------------------------------------- |
+| Semana 0   | Presentación | `01-10-2026` | Repositorio creado. Kanban creado. Calendario de roles creado.                                                        |
+| Semana 1   | Sprint 1     | `08-10-2026` | Despliegue de infraestructura en el servidor (fichero `compose.yml` único). Carga de datos. Conectividad desde Python |
+| Semana 2   | Sprint 1     | `15-10-2026` | Limpieza de los datos. Tratamiento de nulos. Valores atípicos. Cruce de datos                                         |
+| Semana 3   | Sprint 2     | `22-10-2026` | Carga de histórico en MongoDB. Creación de consultas de agregación                                                    |
+| Semana 4   | Sprint 2     | `29-10-2026` | Envío de datos a Redis. Funciones para encolar pacientes y asignación de boxes.                                       |
+| Semana 5   | Sprint 3     | `05-11-2026` | Conexión con la API REST. Implementación del bucle de sondeo y procesamiento lista altas e ingresos                   |
+| Semana 6   | Sprint 3     | `12-11-2026` | Integración completa. Prueba de estrés. Incorporación del módulo opcional de anonimización                            |
+| Semana 7   | Evaluación   | `19-11-2026` | Defensa del proyecto                                                                                                  |
+
+
 ## Contenidos asociados a este reto
 
 |   | Contenidos                                                                            | Notebook de Jupyter |
