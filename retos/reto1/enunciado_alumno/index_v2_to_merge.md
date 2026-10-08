@@ -19,7 +19,7 @@ El sistema debe operar íntegramente de forma reproducible mediante Docker y com
 
 ### Infraestructura (`docker-compose.yml`)
 
-El sistema estará compuesto por un entorno multi-contenedor con los siguientes servicios:
+
 
 - Un servicio para **MongoDB** (con persistencia montada en volumen).
 - Un servicio para **Redis**.
