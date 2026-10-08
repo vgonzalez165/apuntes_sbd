@@ -1,3 +1,8 @@
+---
+layout: default
+title: SISTEMAS DE BIG DATA (Curso 2026-27)
+---
+
 # SISTEMAS DE BIG DATA (Curso 2026-27)
 
 # Relación de contenidos y prácticas del módulo
