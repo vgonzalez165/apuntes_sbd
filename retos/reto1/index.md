@@ -38,10 +38,11 @@ Aunque en el enunciado se expone en más detalle, en la siguiente tablas tienes 
 
 ## Contenidos asociados a este reto
 
-|   | Contenidos                                                                            | Notebook de Jupyter |
-| - | ------------------------------------------------------------------------------------- | ------------------- |
-| 1 | [Carga de datos con Pandas](./apuntes/01_carga_de_datos/Carga_de_datos_en_Pandas.md)  | [ZIP](./apuntes/01_carga_de_datos/01%20-%20Carga%20de%20datos.zip)  |
-| 2 | [Limpieza de datos con Pandas](./apuntes/)                                                      | |
-| 3 | [Anonimización de datos]()                                                            | |
-| 4 | [Bases de datos documentales (MongoDB)]()                                             | |
-| 5 | [Bases de datos clave-valor (Redis)]()                                                | |
+| **Contenidos**                                                         | **Notebook de Jupyter**                           |
+| ---------------------------------------------------------------------- | ------------------------------------------------- |
+| [1. Introducción a Python Pandas](./apuntes/01_introduccion_pandas.md) | [`ipynb`](./apuntes/01_introduccion_pandas.ipynb) |
+| [2. Carga de datos con Pandas](./apuntes/02_carga_datos_pandas.md)     | [`ZIP`](./apuntes/02_carga_datos_pandas.zip)      |
+| [3. Limpieza de datos con Pandas](./apuntes/03_limpieza_datos.md)      | [`ipynb`](./apuntes/03_limpieza_datos.ipynb)      |
+| [4. Anonimización de datos]()                                          |                                                   |
+| [5. Bases de datos documentales (MongoDB)]()                           |                                                   |
+| [6. Bases de datos clave-valor (Redis)]()                              |                                                   |
