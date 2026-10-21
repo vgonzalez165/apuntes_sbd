@@ -9,9 +9,9 @@ Apartado:                   3.- Anonimización de datos
 Resultados de aprendizaje:  ?
 ```
 
-# 2.- Anonimización y protección de datos
+# 3.- Anonimización y protección de datos
 
-## 2.1. Introducción y fundamentos conceptuales
+## 3.1. Introducción y fundamentos conceptuales
 
 La **anonimización de datos** consiste en la transformación de datos personales de tal forma que no puedan utilizarse para identificar a ningún individuo, directa ni indirectamente. No debe considerarse una técnica fija o un interruptor binario, sino un **proceso continuo basado en la gestión del riesgo**, que integra técnicas estadísticas/criptográficas y salvaguardas organizativas para evitar la reidentificación.
 
@@ -41,11 +41,11 @@ Veamos un ejemplo de cada uno de estos conceptos con los siguientes datos:
 **Anonimización**: se eliminan los identificadores directos y, además, se aplican técnicas como generalización o supresión para que no sea posible reidentificar. Estos datos quedan fuera del ámbito de aplicación del RGPD.
 
 
-## 2.2. Tipología de variables y vectores de riesgo
+## 3.2. Tipología de variables y vectores de riesgo
 
 Para seleccionar la técnica adecuada, primero se deben categorizar los atributos del conjunto de datos y comprender los tipos de ataques o revelaciones posibles.
 
-### 2.2.1. Clasificación de las variables
+### 3.2.1. Clasificación de las variables
 
 Según el tipo, podemos clasificar los datos en uno de los siguientes grupos:
 
@@ -54,13 +54,13 @@ Según el tipo, podemos clasificar los datos en uno de los siguientes grupos:
 3. **Atributos sensibles u objetivo:** información relevante para el análisis o negocio, pero cuya revelación genera un daño o perjuicio potencial al individuo (diagnósticos clínicos, salario, transacciones bancarias, ideología política).
 4. **Variables neutras/otras:** datos operativos o descriptivos no vinculables a personas que pueden mantenerse sin transformaciones.
     
-### 2.2.2. Vectores de riesgo de divulgación
+### 3.2.2. Vectores de riesgo de divulgación
 
 - **Reidentificación / Revelación de identidad:** capacidad de asociar directamente a una persona real con un registro del conjunto de datos (por ejemplo, revirtiendo un seudónimo débil o cruzando cuasi-identificadores con el censo electoral).    
 - **Revelación de atributos:** deducir el valor de un atributo sensible de un individuo a partir del conjunto de datos, incluso si no se puede aislar con exactitud su fila específica (por ejemplo, si todas las personas de 45 años del código postal 28001 tienen la misma patología médica)
 - **Revelación de inferencias:** extraer conclusiones con alta probabilidad sobre una persona que ni siquiera formaba parte del dataset original, basándose en los patrones estadísticos generales revelados.
     
-## 2.3. El proceso metodológico en 5 Pasos
+## 3.3. El proceso metodológico en 5 Pasos
 
 Todo proceso anonimización debe seguir una metodología estructurada en 5 fases:
 
@@ -73,7 +73,7 @@ Todo proceso anonimización debe seguir una metodología estructurada en 5 fases
 5. **Gestionar el riesgo residual y documentar:** registrar los parámetros empleados, las transformaciones y los controles para auditorías, manteniendo las tablas de equivalencia en repositorios cifrados independientes.
 
 
-## 2.4. Como anonimizar datos con Python
+## 3.4. Como anonimizar datos con Python
 
 A continuación se detallan las técnicas fundamentales ilustradas con código en `pandas` y librerías criptográficas.
 
@@ -252,11 +252,11 @@ df_agregado = df.groupby(['Department', 'Status']).agg(
 df_agregado_seguro = df_agregado[df_agregado['total_empleados'] >= 5]
 ```
 
-## 2.5. Modelos formales de privacidad y métricas de riesgo
+## 3.5. Modelos formales de privacidad y métricas de riesgo
 
 Para certificar que un conjunto de datos desidentificado es verdaderamente anónimo, se deben aplicar modelos matemáticos formales de evaluación de riesgo.
 
-### 2.5.1. $k$-Anonimato
+### 3.5.1. $k$-Anonimato
 
 Un conjunto de datos cumple **$k$-anonimato** si la información de cada individuo contenida en el dataset no puede distinguirse de al menos $k - 1$ individuos cuyos cuasi-identificadores son exactamente iguales. A cada uno de estos grupos se le denomina **clase de equivalencia**.
 
@@ -275,7 +275,7 @@ print(f"El dataset cumple {k_actual}-anonimato.")
 
 Si $k=1$, significa que existe al menos un registro único en la población que puede ser reidentificado con facilidad.
 
-### 2.5.2. $l$-Diversidad
+### 3.5.2. $l$-Diversidad
 
 El $k$-anonimato no protege contra la **revelación de atributos** si todos los miembros de una clase de equivalencia comparten el mismo valor sensible (ataque de homogeneidad).
 
@@ -291,20 +291,20 @@ l_actual = evaluar_l_diversidad(df, ['Edad_Rango', 'Sexo', 'Provincia'], 'Diagno
 print(f"El dataset cumple {l_actual}-diversidad.")
 ```
 
-### 2.5.3. $t$-Cercanía
+### 3.5.3. $t$-Cercanía
 
 La $l$-diversidad no impide ataques de inferencia cuando los valores sensibles de una clase de equivalencia tienen una distribución muy desproporcionada respecto a la población general.
 
 Una clase de equivalencia satisface **$t$-cercanía** si la distancia estadística (por ejemplo, distancia _Earth Mover's Distance_) entre la distribución del atributo sensible en esa clase y la distribución del atributo en todo el conjunto de datos no supera un umbral $t$.
     
       
-### 2.5.4. Privacidad Diferencial ($\epsilon$-Differential Privacy)
+### 3.5.4. Privacidad Diferencial ($\epsilon$-Differential Privacy)
 
 Es el estándar matemático moderno. Garantiza que la salida de una consulta o cálculo estadístico sobre una base de datos sea prácticamente indistinguible con o sin la presencia de los datos de cualquier individuo específico, inyectando un ruido calibrado (mecanismos de Laplace o Gaussiano) proporcional a la sensibilidad de la consulta y a un presupuesto de privacidad $\epsilon$.
 
   
 
-## 2.6. Ejemplo de un pipeline que integra todo el flujo de trabajo
+## 3.6. Ejemplo de un pipeline que integra todo el flujo de trabajo
 
 El siguiente script integra todas las fases en un flujo de trabajo reproducible:
 
@@ -342,7 +342,7 @@ def pipeline_anonimizacion(df_raw):
 
 
 
-## 2.7. Matriz de Decisión de Técnicas
+## 3.7. Matriz de Decisión de Técnicas
 
 |**Tipo de Variable**|**Técnica Primaria**|**Técnica Secundaria**|**Pérdida de Utilidad**|**Nivel de Protección**|
 |---|---|---|---|---|
@@ -354,7 +354,7 @@ def pipeline_anonimizacion(df_raw):
 |**Salarios / Transacciones**|Redondeo a millares|Top/Bottom-coding (Truncamiento)|Baja|Medio - Alto|
 
 
-## 2.8. Gobernanza y Marco Legal (RGPD)
+## 3.8. Gobernanza y Marco Legal (RGPD)
 
 1. **Documentación del Proceso:** Es obligatorio documentar las decisiones de diseño tomadas, los parámetros elegidos (por ejemplo, el valor de $k$, el ruido añadido o los tramos de agrupación) y las justificaciones del equilibrio entre privacidad y utilidad.
 2. **Custodia de Claves:** Si se utiliza seudonimización o cifrado reversible, las claves criptográficas y tablas de correspondencia deben almacenarse en repositorios independientes con control de acceso estricto y auditoría de accesos.
