@@ -5,13 +5,13 @@
 Módulo:                     SISTEMAS DE BIG DATA
 Profesor:                   Víctor J. González
 Unidad de Trabajo:          UT02. PERSISTENCIA DOCUMENTAL, CACHÉ Y PROCESAMIENTO ETL
-Apartado:                   4.- MongoDB
+Apartado:                   5.- MongoDB
 Resultados de aprendizaje:  ?
 ```
 
-# 4. Introducción a MongoDB con Python (`PyMongo`)
+# 5. Introducción a MongoDB con Python (`PyMongo`)
 
-## 4.1. El paradigma NoSQL y las bases de datos documentales
+## 5.1. El paradigma NoSQL y las bases de datos documentales
 
 En proyectos de Inteligencia Artificial y Big Data es habitual trabajar con datos semiestructurados (respuestas de APIs en formato JSON, logs de servidores, telemetría de sensores IoT o metadatos de entrenamientos) que cambian de estructura con frecuencia o crecen a gran velocidad. Las bases de datos relacionales (SQL) imponen esquemas rígidos y operaciones `JOIN` costosas al escalar en múltiples servidores.
 
@@ -35,7 +35,7 @@ En proyectos de Inteligencia Artificial y Big Data es habitual trabajar con dato
 | `JOIN` entre tablas            | Documentos embebidos (anidados) o etapa `$lookup`      | Diccionarios/listas dentro de un `dict` |
 
 
-## 4.2. Conexión desde Python con `PyMongo`
+## 5.2. Conexión desde Python con `PyMongo`
 
 Para conectar Python con MongoDB utilizamos la librería oficial `pymongo`. La gran ventaja para el desarrollo en Python es que **los documentos se manipulan directamente como diccionarios nativos (`dict`)**.
 
@@ -62,11 +62,11 @@ coleccion_sensores = db["lecturas_iot"]
 
 ```
 
-## 4.3. Operaciones CRUD básicas
+## 5.3. Operaciones CRUD básicas
 
 Imagina que estamos almacenando lecturas de dispositivos IoT repartidos por una planta industrial para un posterior modelo de mantenimiento predictivo.
 
-### 4.3.1. Inserción de datos (`Create`)
+### 5.3.1. Inserción de datos (`Create`)
 
 Si no especificamos el campo `"_id"`, MongoDB generará automáticamente un `ObjectId` único de 12 bytes (que incluye una marca temporal de creación).
 
@@ -99,7 +99,7 @@ coleccion_sensores.insert_many(lote_lecturas)
 
 ```
 
-### 4.3.2. Consultas básicas (`Read`)
+### 5.3.2. Consultas básicas (`Read`)
 
 Para consultar usamos `find_one()` (devuelve un único diccionario o `None`) y `find()` (devuelve un **cursor iterable**).
 
@@ -162,7 +162,7 @@ for r in resultados:
 
 *Nota sobre subdocumentos:* Para filtrar por un campo dentro de un diccionario anidado se usa la **notación de punto** entre comillas: `{"ubicacion.planta": 1}`.
 
-### 4.3.3. Actualización y Borrado (`Update` y `Delete`)
+### 5.3.3. Actualización y Borrado (`Update` y `Delete`)
 
 Para modificar documentos sin sobrescribirlos por completo se utilizan operadores de actualización como `$set` (asignar o crear un campo) o `$inc` (incrementar un valor numérico).
 
@@ -185,7 +185,7 @@ coleccion_sensores.delete_many({"estado": "DESCARTADO"})
 ```
 
 
-## 4.4. El Framework de Agregación (`aggregate`)
+## 5.4. El Framework de Agregación (`aggregate`)
 
 Cuando necesitamos agrupar datos, calcular estadísticas o transformar estructuras antes de entrenar un modelo, no es eficiente descargar millones de documentos a Python para procesarlos. En su lugar, usamos un **Pipeline de Agregación** que se ejecuta directamente en el motor de MongoDB (escrito en C++).
 
@@ -256,7 +256,7 @@ for fila in resultado_agregacion:
 
 ```
 
-## 4.5. Integración con Pandas 
+## 5.5. Integración con Pandas 
 
 Como tanto `find()` como `aggregate()` devuelven cursores de diccionarios de Python, transformarlos en un `DataFrame` de **Pandas** para análisis exploratorio o entrenamiento con `Scikit-Learn` es inmediato:
 

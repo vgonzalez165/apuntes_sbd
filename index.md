@@ -22,7 +22,7 @@ title: SISTEMAS DE BIG DATA (Curso 2026-27)
 |          | 2.2 [Carga de datos con Pandas](./retos/reto1/apuntes/02_carga_datos_pandas.md)                  |                |                   |
 |          | 2.3 [Limpieza de datos](./retos/reto1/apuntes/03_limpieza_datos.md)                              |                |                   |
 |          | 2.4 [Anonimización de datos](./retos/reto1/apuntes/03_limpieza_datos.md)                         |                |                   |
-|          | 2.5 [Bases de datos documentales (MongoDB)]()                                                    |                |                   |
+|          | 2.5 [Bases de datos documentales (MongoDB)](./retos/reto1/apuntes/05_mongodb.md)                 |                |                   |
 |          | 2.6 [Bases de datos clave-valor (Redis)]()                                                       |                |                   |
 |          |                                                                                                  |                |                   |
 |          | **RETO 1** [Sistema de triaje y trazabilidad de urgencias hospitalarias](./retos/reto1/index.md) | **19/11/2026** |                   |
