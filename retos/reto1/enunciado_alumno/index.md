@@ -172,7 +172,7 @@ Algunas cosas que tienes que tener en cuenta son:
 
 - Para gestionar la cola de triaje tendréis que usar un *Sorted Set* (`urgencias:cola_espera`). El *score* numérico debe ser el **límite máximo de atención** calculado mediante el algoritmo *Earliest Deadline First*. 
 
-$$\text{score} = \text{timestamp\_llegada} + (\text{tiempo\_max\_espera\_min} \times 60)$$
+![Fórmula score triaje](image.png)
 
 - De esta forma podrás recuperar el paciente con el score más bajo mediante la función `ZPOPMIN`.
 - El proceso será el siguiente:
