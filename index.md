@@ -23,7 +23,7 @@ title: SISTEMAS DE BIG DATA (Curso 2026-27)
 |          | 2.3 [Limpieza de datos](./retos/reto1/apuntes/03_limpieza_datos.md)                              |                |                   |
 |          | 2.4 [Anonimización de datos](./retos/reto1/apuntes/03_limpieza_datos.md)                         |                |                   |
 |          | 2.5 [Bases de datos documentales (MongoDB)](./retos/reto1/apuntes/05_mongodb.md)                 |                |                   |
-|          | 2.6 [Bases de datos clave-valor (Redis)]()                                                       |                |                   |
+|          | 2.6 [Bases de datos clave-valor (Redis)](./retos/reto1/apuntes/06_redis.md)                      |                |                   |
 |          |                                                                                                  |                |                   |
 |          | **RETO 1** [Sistema de triaje y trazabilidad de urgencias hospitalarias](./retos/reto1/index.md) | **19/11/2026** |                   |
 |          |                                                                                                  |                |                   |
