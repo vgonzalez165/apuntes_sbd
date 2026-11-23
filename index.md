@@ -25,10 +25,16 @@ title: SISTEMAS DE BIG DATA (Curso 2026-27)
 |          | 2.5 [Bases de datos documentales (MongoDB)](./retos/reto1/apuntes/05_mongodb.md)                 |                |                   |
 |          | 2.6 [Bases de datos clave-valor (Redis)](./retos/reto1/apuntes/06_redis.md)                      |                |                   |
 |          |                                                                                                  |                |                   |
-|          | **RETO 1** [Sistema de triaje y trazabilidad de urgencias hospitalarias](./retos/reto1/index.md) | **19/11/2026** |                   |
+|          | **RETO 1** [Sistema de triaje y trazabilidad de urgencias hospitalarias](./retos/reto1/index.md) | **26/11/2026** |                   |
 |          |                                                                                                  |                |                   |
 | **UT3**  | **GRAFOS, ALGORITMIA Y REDES COMPLEJAS**                                                         |                | `RA1` `RA3` `RA4` |
+|          | 3.1 [Bases de datos orientadas a grafos]()                                                       |                |                   |
+|          | 3.2 [El lenguaje de consulta Cypher]()                                                           |                |                   |
+|          | 3.3 [Trabajo con grafos con NetworkX]()                                                          |                |                   |
+|          | 3.4 [Conceptos relevantes de grafos]()                                                           |                |                   |
 |          |                                                                                                  |                |                   |
+|          |                                                                                                  |                |                   |
+|          | **RETO 2** []()                                                                                  | **xx/xx/xxxx** |                   |
 |          |                                                                                                  |                |                   |
 | **UT04** | **SERIES TEMPORALES, TELEMETRÍA Y DASHBOARDS OPERATIVOS**                                        |                | `RA2` `RA4`       |
 |          |                                                                                                  |                |                   |
