@@ -21,8 +21,8 @@ El protocolo descentralizado *NovaSwap* ha sufrido un drenaje de fondos. Los ata
 
 Vuestro equipo actúa como la unidad de inteligencia forense **ChainSentinel**. Recibiréis dos archivos de entrada:
 
-1. `nodos_carteras.csv`: Actores de la red (`wallet_id`, `tipo` [Wallet / Exchange], `kyc` [True / False], `pais_registro`, `riesgo_previo`).
-2. `bloques_transacciones.json`: Transacciones dirigidas (`tx_hash`, `origen`, `destino`, `monto_btc`, `fee_btc`, `timestamp`).
+1. `nodos_carteras.csv`: actores de la red (`wallet_id`, `tipo` [Wallet / Exchange], `kyc` [True / False], `pais_registro`, `riesgo_previo`).
+2. `bloques_transacciones.json`: transacciones dirigidas (`tx_hash`, `origen`, `destino`, `monto_btc`, `fee_btc`, `timestamp`).
 
 El objetivo del proyecto es levantar una base de datos orientada a grafos en **Neo4j v5**, cargar los datos de forma eficiente, programar consultas topológicas en **Cypher** para detectar patrones de lavado y aplicar métricas de grafos con **NetworkX** y **Pandas** para validar una hipótesis empírica de detección.
 
